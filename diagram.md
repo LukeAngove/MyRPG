@@ -1,3 +1,4 @@
+<img src="./trigram.svg">
 2 Sides:
  - Black: external forces
  - White: internal forces
