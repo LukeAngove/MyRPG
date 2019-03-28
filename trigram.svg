@@ -1,0 +1,50 @@
+<svg width="400" height="400">
+  <defs>
+    <radialGradient id="lightning">
+      <stop offset="0%" style="stop-color:rgb(150,150,0);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(250,250,0);stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="fire">
+      <stop offset="0%" style="stop-color:rgb(120,0,0);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(250,0,0);stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="water">
+      <stop offset="0%" style="stop-color:rgb(0,0,145);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(0,0,250);stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="earth">
+      <stop offset="0%" style="stop-color:rgb(70,35,10);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(140,70,19);stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="spirit">
+      <stop offset="0%" style="stop-color:rgb(0,90,0);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(0,190,0);stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="200" height="400" fill="black"/>
+  <rect x="200" y="0" width="200" height="400" fill="white"/>
+
+  <!-- Main lines -->
+  <line x1="200" x2="50"  y1="50" y2="150" stroke="white" stroke-width="4"/>
+  <line x1="200" x2="100" y1="50" y2="300" stroke="white" stroke-width="4"/>
+  <line x1="200" x2="300" y1="50" y2="300" stroke="black" stroke-width="4"/>
+  <line x1="200" x2="350"  y1="50" y2="150" stroke="black" stroke-width="4"/>
+
+  <!-- Secondary lines -->
+  <line x1="200" x2="50"  y1="240" y2="150" stroke="white" stroke-width="4"/>
+  <line x1="200" x2="100" y1="240" y2="300" stroke="white" stroke-width="4"/>
+  <line x1="300" x2="200"  y1="300" y2="240" stroke="black" stroke-width="4"/>
+  <line x1="350" x2="200" y1="150" y2="240" stroke="black" stroke-width="4"/>
+
+  <!-- Patch joint of black/white -->
+  <line x1="199" x2="199" y1="237.6" y2="242.4" stroke="white" stroke-width="2"/>
+
+  <!-- Circles -->
+  <circle cx="200" cy="50"  r="40" stroke="black" stroke-width="4" fill="url(#lightning)" />
+  <circle cx="50"  cy="150" r="40" stroke="black" stroke-width="4" fill="url(#fire)" />
+  <circle cx="350" cy="150" r="40" stroke="black" stroke-width="4" fill="url(#water)" />
+  <circle cx="100" cy="300" r="40" stroke="black" stroke-width="4" fill="url(#earth)" />
+  <circle cx="300" cy="300" r="40" stroke="black" stroke-width="4" fill="url(#spirit)" />
+</svg>
