@@ -1,8 +1,11 @@
-<img src="./trigram.svg">
+![Image](trigram.svg)
+
+# Forces
 2 Sides:
  - Black: external forces
  - White: internal forces
 
+# Spheres
 5 Spheres:
  - Lightning (yellow): dexterity, quick thought, change
  - Fire (red): strength, aggression, force of will on others
@@ -12,5 +15,5 @@
 
 All forces are connected to lighting (change). Lightning is both internal and external.
 
-The Flow:
+# The Flow
 The movement of elements between each other; moving of counters between the spheres.
