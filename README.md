@@ -1,4 +1,4 @@
-![Image](trigram.svg)
+![Image](board.svg)
 
 # Forces
 2 Sides:
@@ -33,3 +33,18 @@ Characters can move gems along flows as an action.
 - Balance of gems in Inner and Outer Forces. 
 - Balance of gems in opposing elements (non-connected Spheres)
 - Balance of gems moved between Spheres or Forces.
+
+# Magic/Abilities
+Cards can be used for magic and abilities. Possible status of cards:
+- Static
+    - Tapped
+    - Untapped
+- Played
+    - Tapped
+    - Untapped
+- In hand
+- In deck
+- Discarded
+- Available (think face up but not in deck, like a deck builder)
+
+Doing actions with cards should require some interaction with the board.
