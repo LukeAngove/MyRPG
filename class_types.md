@@ -22,7 +22,7 @@ A typical rogue in this system will not so much seek to steel an keep money, but
 ### Manipulators (Bards/Performers/Faces)
 #### Priorities:
 - Flow
-- Number of Gems
+- Internal Spheres
 - Cards 
 
 #### Description
