@@ -76,10 +76,16 @@ class DrawSymbol:
         self.minor_increment()
         self.drawer.draw_gems(gem_colors, position=(self.pos, 0))
         self.increment()
+    
+    def draw_desc(self):
+        self.drawer.draw_desc((0,0), (100,100), "This is some text", 10)
+
+    def tostring(self):
+        return self.drawer.tostring()
 
 class Drawer:
     def __init__(self, filename, scale=10):
-        self.svg = svgwrite.Drawing(filename=filename)
+        self.svg = svgwrite.Drawing(filename=filename, profile='tiny', debug=True)
         self.scale=scale
 
     def octagon(self, color, position, corner_size, flat_size, outer_line_width):
@@ -106,7 +112,7 @@ class Drawer:
             scale = self.scale
         number = len(colors)
         if number is 1:
-            self.draw_gem(colors[0], position=position, scale=scale)
+            self.draw_gem(colors[0], position=(position[0]+0.5*scale, position[1]+0.7*scale), scale=0.75*scale)
         elif number is 2:
             pos1 = (position[0]+0.6*scale, position[1])
             pos2 = (position[0]+0.6*scale, position[1]+1.2*scale)
@@ -125,14 +131,15 @@ class Drawer:
         if scale is None:
             scale = self.scale
         offset = 0.57*scale # To make gem fit inside sphere
-        position = (position[0]+offset, position[1]+offset)
+        position = (position[0]+offset, position[1]+offset+1)
         outer_line_width = 2
         corner_size = 1*scale
         flat_size = 2*scale
         edging = outer_line_width / 2
 
         octagon_pts = self.octagon(color, position, corner_size, flat_size, outer_line_width)
-        self.svg.add(self.svg.polygon(points=octagon_pts, fill=color, stroke_width=outer_line_width, stroke="black"))
+        poly = self.svg.polygon(points=octagon_pts, fill=color, stroke_width=outer_line_width, stroke="black")
+        self.svg.add(poly)
 
         octagon_pts = self.octagon_internal_corners(octagon_pts)
 
@@ -145,7 +152,7 @@ class Drawer:
         if scale is None:
             scale = self.scale
         gem_size_factor = 2.6*scale
-        centre = (position[0]+gem_size_factor, position[1]+gem_size_factor)
+        centre = (position[0]+gem_size_factor, position[1]+gem_size_factor+2)
         self.svg.add(self.svg.circle(center=centre, r=gem_size_factor, fill=color, stroke="black", stroke_width=2))
 
     def draw_arrow(self, position, scale=None):
@@ -154,7 +161,7 @@ class Drawer:
         arrow_mid = [(0, 1), (2, 1)]
         arrow_point = [(1, 0), (2, 1), (1, 2)]
 
-        position = (position[0], position[1]+1.6*scale)
+        position = (position[0], position[1]+1.9*scale)
         def grow(array, pos, scale):
             res = [(x*scale+pos[0], y*scale+pos[1]) for x,y in array]
             return res
@@ -164,28 +171,19 @@ class Drawer:
         self.svg.add(self.svg.polyline(points=arrow_mid, fill="none", stroke_width=2, stroke="black"))
         self.svg.add(self.svg.polyline(points=arrow_point, fill="none", stroke_width=2, stroke="black"))
 
+    def draw_desc(self, position, size, text, scale=None):
+        if scale is None:
+            scale = self.scale
+        self.svg.add(self.svg.textArea(text=text, insert=position, size=size, font_size=scale, fill="black"))
+
     def __enter__(self):
         return self
+    
+    def tostring(self):
+        return self.svg.tostring()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.svg.save()
-#<svg version="1.1" baseProfile="full"
-#     width="35" height="35"
-#     xmlns="http://www.w3.org/2000/svg">
-#    <defs>
-#        <radialGradient id="lightning" spreadMethod="pad" fx="25%" fy="75%" r="50%" cx="50%" cy="50%">
-#            <stop offset="0%" stop-color="rgb(250,250,0)" stop-opacity="1" />
-#            <stop offset="100%" stop-color="rgb(150,150,0)" stop-opacity="1" />
-#        </radialGradient>
-#    </defs>
-#    <polygon stroke-width="2" stroke="black"
-#             fill="url(#lightning)" points="9,1 26,1, 34,9 34,26 26,34 9,34 1,26 1,9" />
-#    <polyline stroke-width="1" stroke="black" fill="none" points="26,1, 26,9 34,9" />
-#    <polyline stroke-width="1" stroke="black" fill="none" points="34,26 26,26 26,34" />
-#    <polyline stroke-width="1" stroke="black" fill="none" points="9,34 9,26 1,26" />
-#    <polyline stroke-width="1" stroke="black" fill="none" points="9,1 9,9 1,9" />
-#    <rect stroke-width="1" stroke="black" fill="none" x="9" y="9" width="17" height="17">
-#</svg>
+        pass
 
 def parse_all(the_string):
     the_string = the_string.replace(" ", "")
@@ -239,16 +237,18 @@ def parse_single(the_string):
         'type': gtype
         }
 
-def text_to_svg(in_string, filename, scale=10):
+def text_to_svg(in_string, scale=10):
     to_draw = parse_all(in_string)
-    with DrawSymbol(filename, scale=scale) as gem:
+    with DrawSymbol("not_saved_anywhere.svg", scale=scale) as gem:
         for d in to_draw:
             if d["type"] is "into":
                 gem.draw_into(**d["args"])
             elif d["type"] is "in":
                 gem.draw_in(**d["args"])
             elif d["type"] is "out":
-                gem.draw_out(**d["args"])
+               gem.draw_out(**d["args"])
+        res = gem.tostring()
+    return res
 
 if __name__ == "__main__":
-    text_to_svg("al ->  (a)|w:(e)|(i) -> w", "mydrawing.svg", scale=10)
+    print(text_to_svg("al ->  (a)|w:(e)|(i) -> w", scale=10))
