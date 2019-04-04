@@ -12,7 +12,14 @@ div {
     border: none;
 }
 
-.inText {
+.Rules {
+    text-align: left;
+    border: none;
+    padding: 0 5px;
+}
+
+.Description {
+    font-style: italic;
     text-align: left;
     border: none;
     padding: 0 5px;
