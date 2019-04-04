@@ -9,16 +9,14 @@
         <h3>{{ title }}</h3>
         <img src={{ image }} width=200 alt="No image found">
         <div class="contentZone">
-			<ul>
-                {% for item in abilities %}
-                <li>
-                    <span>{{ item.name }}</span>:
-                    {{ item.image }}
-                    {{ item.desc }}
-                </li>
-                {% endfor %}
-            </ul>
-            {{ flavor_text }}
+        <div class="Cost">
+        {{ cost }}
+        </div>
+        <div class="inText">
+        {{ rules }}
+        </div>
+        <div class="inText">
+        {{ flavor_text }}
         </div>
     </div>
 </body>

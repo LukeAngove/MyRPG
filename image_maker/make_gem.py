@@ -42,6 +42,7 @@ class DrawSymbol:
         self.pos = 0
         self.pos_move = scale*6
         self.pos_minor_move = scale*3.3
+        self.height = scale*6
 
     def __enter__(self):
         self.drawer.__enter__()
@@ -81,11 +82,13 @@ class DrawSymbol:
         self.drawer.draw_desc((0,0), (100,100), "This is some text", 10)
 
     def tostring(self):
+        self.drawer.svg.attribs['height'] = self.height
+        self.drawer.svg.attribs['width'] = self.pos
         return self.drawer.tostring()
 
 class Drawer:
     def __init__(self, filename, scale=10):
-        self.svg = svgwrite.Drawing(filename=filename, profile='tiny', debug=True)
+        self.svg = svgwrite.Drawing(filename=filename, profile='tiny', debug=True, height=5*scale)
         self.scale=scale
 
     def octagon(self, color, position, corner_size, flat_size, outer_line_width):
