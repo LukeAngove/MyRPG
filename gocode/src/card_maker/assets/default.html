@@ -9,7 +9,7 @@
     
         div {
             border: 1px solid #ccc;
-            padding: 0 5px;
+            padding: 0 10px;
         }
     
         .Cost {
@@ -24,6 +24,11 @@
             border: none;
             padding: 0 0px;
         }
+
+        .Image {
+            width: 2.25in;
+            height: 1.25in;
+        }
     
         .Description {
             font-style: italic;
@@ -33,6 +38,7 @@
         }
     
         .container {
+            text-align: center;
             width: 2.5in;
             height: 3.5in;
             box-shadow: 8px 8px 2px #ddd;
@@ -41,6 +47,7 @@
         .contentZone {
             font-size: 9pt;
             width: 2.25in;
+            height: {{if .Image}}1.5in{{else}}2.8in{{end}};
             margin: 0px 0;
         }
     </style>
@@ -48,7 +55,7 @@
 <body>
     <div class="container">
         <h3>{{ .Title }}</h3>
-        {{if .Image}}<img src={{ .Image }} width=200 alt="No image found">{{end}}
+        {{if .Image}}<img src={{ .Image }} class="Image" alt="No image found">{{end}}
         <div class="contentZone">
             <div class="Cost">
             {{ .Cost }}
