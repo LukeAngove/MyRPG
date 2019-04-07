@@ -1,0 +1,8 @@
+filegroup(
+    name = "card_maker_assets",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "cards.yml",
+        "default.html",
+    ],
+)

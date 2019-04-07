@@ -1,0 +1,6 @@
+cards:
+- title: Some Spell
+  image:
+  cost: "al->(a)|w:(e)|(i)->w"
+  rules: "This where the rules go"
+  flavor: "Here's a long description"

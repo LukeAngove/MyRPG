@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ .Title }}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    
+        div {
+            border: 1px solid #ccc;
+            padding: 0 5px;
+        }
+    
+        .Cost {
+            margin: auto;
+            border: none;
+            text-align: center;
+            padding: 0 0px;
+        }
+    
+        .Rules {
+            text-align: left;
+            border: none;
+            padding: 0 0px;
+        }
+    
+        .Description {
+            font-style: italic;
+            text-align: left;
+            border: none;
+            padding: 0 0px;
+        }
+    
+        .container {
+            width: 2.5in;
+            height: 3.5in;
+            box-shadow: 8px 8px 2px #ddd;
+        }
+    
+        .contentZone {
+            font-size: 9pt;
+            width: 2.25in;
+            margin: 0px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>{{ .Title }}</h3>
+        {{if .Image}}<img src={{ .Image }} width=200 alt="No image found">{{end}}
+        <div class="contentZone">
+            <div class="Cost">
+            {{ .Cost }}
+            </div>
+            <div class="Rules">
+            {{ .Rules }}
+            </div>
+            <div class="Description">
+            {{ .Flavor }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
