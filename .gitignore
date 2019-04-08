@@ -1,3 +1,9 @@
+*.swp
 *.code-workspace
 .venv
 my_rpg/*
+gocode/bazel-*
+.DS_Store
+gocode/src/github.com/*
+gocode/src/gopkg.in/*
+gocode/pkg/*
