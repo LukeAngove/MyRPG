@@ -3,7 +3,7 @@ There are 4 'class' of card (based on the categories in class.md)
 - Flow cards permit movement of gems between the spheres
 - State cards provide actions or benefits that exist so long as gems are in the appropriate pools, and are discarded when that state ends
 - Action cards provide a certain action that may or may not rely or/change the state of the gems.
-- Equipment cards are played outside of the deck game and provide static effects to the characters (including possible actions or changes to how the cards/state work)
+- Static cards are played outside of the deck game and provide static effects to the characters (including possible actions or changes to how the cards/state work)
 
 Each card should be associated with a cost, and players should not have decks with a cost that exceeds some cap based on their level (which means a larger deck of weaker cards, or a smaller deck of stronger ones). There might also be some individual card cost cap, to prevent cards from high levels being used.
 
@@ -59,8 +59,8 @@ These will be the most numerous cards, and the most class specific (ranging from
 | Spend ALL fire to add ND6 to a physical attack. Suffer double damage next turn | Spend 2 water. Magical, ranged, 1D6 | Spend 1 spirit, 1 earth. Heal 2D4 from adjacent character | 
 | No chain | No chain | No chain |
 
-## Card Class: **Equipment**
-| Arming Sword | Battleaxe | Longbow | Unarmed | Shield | Amulet of Change | Amulet of Strength | Potion of Inner Conflict |
+## Card Class: **Static**
+| Arming Sword | Battleaxe | Longbow | Unarmed Training | Shield | Amulet of Change | Blessing of Strength | Potion of Inner Conflict |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 Hand Physical, melee, 1D6. Optionally spend 1 fire to make 1D8 | Spend 1 fire. 2 Hand Physical, melee, 1D10 | 2 Hand Physical, ranged, 1D8 | Spend 1 of any. 1 Hand Physical, melee, 1D4 | 1 Hand. Add +2 to AC | Once per turn, a gem moved to the lightning pool can be moved one additional time. | Ignore the requirement of 1 gem from a single active stance | Consume to change the polarity of 3 gems |
 
