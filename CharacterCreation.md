@@ -24,10 +24,10 @@ All characters start with 1 gem of each element.
 ## Costs
 ### New Gems
 Second gems of an element:
- - 10x number of second level gems owned.
+ - 10 + 10x number of second level gems owned (10 for the first, 20 for the second, etc.)
 
 Third gems of an element:
- - 50x number of third level gems owned.
+ - 50 + 50x number of third level gems owned (50 for the first, 100 for the second, etc.)
 
 ### Card Costs
  - 2x number of gems in the cost
