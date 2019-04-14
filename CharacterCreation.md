@@ -4,17 +4,19 @@
 All characters start with 1 gem of each element.
 
 ## Calculating Secondary Statistics
-HP: 3 for each earth gem, 2 for each fire, 1 for all others.
+**HP:** 3 for each earth gem, 2 for each fire, 1 for all others.
 
-AC: Sum of lightning and fire gems, +1 for each gem in the lightning sphere, at the time of attack.
+**AC:** Sum of lightning and fire gems, +1 for each gem in the lightning sphere, at the time of attack.
 
-Max Cards drawn: Number of gems in the water sphere at the start of a turn. Up to this number can be drawn, cards that don't fit in your hand are discarded when handsize is checked.
+**Maximum Cards Drawn:** Number of gems in the water sphere at the start of a turn. Up to this number can be drawn, cards that don't fit in your hand are discarded when handsize is checked. Cards are always drawn at the start of a players turn.
 
-Hand size: 2 + Sum gems in spirit and earth spheres. Checked at the end of the players turn.
+**Hand Size:** 2 + Sum gems in spirit and earth spheres. Checked at the end of the players turn, and when drawing cards.
 
-Gem movement: 2 + number of gems in the lightning sphere at the start of a turn.
+**Maximum Cards Played:** 1 + the number of gems in the water sphere at the time of playing the card. If a player has 3 gems in water, then plays a card that moves 2 gems out, the player cannot play any more cards, as their limit is 1, and one card has already been played. 
 
-Maximum Movement: Number of gems in the fire sphere when the movement occurs (if movement so far this turn exceeds the current gems, the character cannot move).
+**Gem movement:** 2 + number of gems in the lightning sphere at the start of a turn.
+
+**Maximum Movement:** Number of gems in the fire sphere when the movement occurs (if movement so far this turn exceeds the current gems, the character cannot move).
 
 ## Starting XP
 20, must be spent before play.
