@@ -8,9 +8,9 @@ HP: 3 for each earth gem, 2 for each fire, 1 for all others.
 
 AC: Sum of lightning and fire gems, +1 for each gem in the lightning sphere, at the time of attack.
 
-Cards drawn: Number of gems in the water sphere at the start of a turn.
+Max Cards drawn: Number of gems in the water sphere at the start of a turn. Up to this number can be drawn, cards that don't fit in your hand are discarded when handsize is checked.
 
-Hand size: Sum of water and earth gems.
+Hand size: 2 + Sum gems in spirit and earth spheres. Checked at the end of the players turn.
 
 Gem movement: 2 + number of gems in the lightning sphere at the start of a turn.
 
