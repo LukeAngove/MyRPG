@@ -6,10 +6,13 @@ gazelle(name = "gazelle")
 load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar", "pkg_deb")
 
 pkg_tar(
-    name = "card_maker",
+    name = "card_maker_" + select({
+      "@bazel_tools//src/conditions:windows": "windows_amd64",
+      "@bazel_tools//src/conditions:darwin": "darwin_amd64",
+      "@bazel_tools//src/conditions:linux": "linux_amd64",
+      "//conditions:default": ""})
+
     extension = "tar.gz",
-    # strip_prefix = "src/card_maker/cmd",
-    # package_dir = "/usr/local/bin",
     srcs = [
         "//src/card_maker/cmd:card_maker",
         "//src/card_maker/assets:card_maker_assets",
