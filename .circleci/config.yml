@@ -1,0 +1,57 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version
+      - image: circleci/golang:1.11
+
+    #### TEMPLATE_NOTE: go expects specific checkout path representing url
+    #### expecting it in the form of
+    ####   /go/src/github.com/circleci/go-tool
+    ####   /go/src/bitbucket.org/circleci/go-tool
+    working_directory: /go/src/github.com/LukeAngove/MyRPG
+    steps:
+      - checkout
+      # specify any bash command here prefixed with `run: `
+      - run:
+          name: install apt packages
+          command: "sudo apt-get install -y pkg-config zip g++ zlib1g-dev unzip python patch"
+      - run:
+          name: Install bazel
+          command: |
+            wget https://github.com/bazelbuild/bazel/releases/download/0.24.1/bazel-0.24.1-installer-linux-x86_64.sh;
+            chmod +x bazel-0.24.1-installer-linux-x86_64.sh;
+            ./bazel-0.24.1-installer-linux-x86_64.sh --user;
+      - run:
+          name: Build cardmaker Linux
+          command: |
+            cd gocode;
+            /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 //:card_maker;
+
+      - store_artifacts:
+          path: gocode/bazel-bin/card_maker.tar.gz
+          destination: card_maker_linux_x64.tar.gz
+
+      - run:
+          name: Build cardmaker Windows
+          command: |
+            cd gocode;
+            /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:windows_amd64 //:card_maker;
+
+      - store_artifacts:
+          path: gocode/bazel-bin/card_maker.tar.gz
+          destination: card_maker_windows_x64.tar.gz
+
+      - run:
+          name: Build cardmaker MacOS
+          command: |
+            cd gocode;
+            /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:darwin_amd64 //:card_maker;
+
+      - store_artifacts:
+          path: gocode/bazel-bin/card_maker.tar.gz
+          destination: card_maker_darwin_x64.tar.gz
+
