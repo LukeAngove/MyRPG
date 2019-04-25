@@ -55,3 +55,11 @@ jobs:
           path: gocode/bazel-bin/card_maker.tar.gz
           destination: card_maker_darwin_x64.tar.gz
 
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            go get github.com/tcnksm/ghr
+            # $(my-binary --version)
+            VERSION=latest
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
+
