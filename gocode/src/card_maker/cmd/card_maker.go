@@ -195,7 +195,7 @@ func get_color_list() map[string]string {
 		"i": "white",
 		"t": "black",
 		"l": "yellow",
-		"f": "fire",
+		"f": "red",
 		"e": "brown",
 		"w": "blue",
 		"s": "green",
