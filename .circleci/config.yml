@@ -33,35 +33,34 @@ jobs:
       - run:
           name: Build Cardmaker Linux
           command: |
-            cd gocode;
+            cd card_maker;
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 //:card_maker;
             cd ..;
-            cp gocode/bazel-bin/card_maker.tgz ./artifacts/card_maker_linux_x64.tgz;
-
+            cp card_maker/bazel-bin/card_maker.tgz ./artifacts/card_maker_linux_x64.tgz;
 
       - run:
           name: Build Cardmaker Windows
           command: |
-            cd gocode;
+            cd card_maker;
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:windows_amd64 //:card_maker;
             cd ..;
-            cp gocode/bazel-bin/card_maker.tgz ./artifacts/card_maker_windows_x64.tgz;
+            cp card_maker/bazel-bin/card_maker.tgz ./artifacts/card_maker_windows_x64.tgz;
 
       - run:
           name: Build Cardmaker Darwin
           command: |
-            cd gocode;
+            cd card_maker;
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:darwin_amd64 //:card_maker;
             cd ..;
-            cp gocode/bazel-bin/card_maker.tgz ./artifacts/card_maker_darwin_x64.tgz;
+            cp card_maker/bazel-bin/card_maker.tgz ./artifacts/card_maker_darwin_x64.tgz;
 
       - run:
           name: Make cards html
           command: |
-            cd gocode;
+            cd card_maker;
             /home/circleci/bin/bazel build //:cards;
             cd ..;
-            cp gocode/bazel-bin/cards.html ./artifacts/cards.html;
+            cp card_maker/bazel-bin/cards.html ./artifacts/cards.html;
 
       - store_artifacts:
           path: artifacts/*
@@ -69,9 +68,11 @@ jobs:
       - run:
           name: "Publish Linux on GitHub"
           command: |
-            go get github.com/tcnksm/ghr
-            # $(my-binary --version)
-            VERSION=latest
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} artifacts
-
+            if [[ "${CIRCLE_BRANCH}" == "master" ]]
+            then
+              go get github.com/tcnksm/ghr
+              # $(my-binary --version)
+              VERSION=latest
+              ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} artifacts
+            fi
 
