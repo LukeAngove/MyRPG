@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/LukeAngove/MyRPG.svg?style=svg)](https://circleci.com/gh/LukeAngove/MyRPG)
+
 ![Image](board.svg)
 
 # Forces
