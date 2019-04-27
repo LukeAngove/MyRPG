@@ -1,6 +1,143 @@
+rules_order:
+- Test
+- Threshold
+- Target
+- Range
+- Damage
+- Sustained
+
 cards:
-- title: Some Spell
-  image:
-  cost: "al->(a)|w:(e)|(i)->w"
-  rules: "This where the rules go"
-  flavor: "Here's a long description"
+- title: Flame
+  tags: [Physical, Fire, Spell, Attack, Aggressive]
+  cost: "(f)->a"
+  rules:
+    Test: (ffw)
+    Threshold: Target's PD
+    Target: Single
+    Range: Line of sight
+    Damage: SM+a(f)
+  flavor: "Not sure about long descriptions yet"
+- title: Pain
+  tags: [Mental, Spell, Attack, Aggressive]
+  cost: "(w)->a"
+  rules:
+    Test: (wwl)
+    Threshold: Target's MD
+    Target: Single
+    Range: Line of Sight
+    Damage: SM+a(w)
+  flavor: "Not sure about long descriptions yet"
+- title: Extended Pain
+  tags: [Mental, Spell, Attack, Aggressive]
+  cost: "(w)->a|w:(w)"
+  rules:
+    Test: (wwl)
+    Threshold: Target's MD
+    Target: single
+    Range: line of sight
+    Damage: SM+a(w)
+    Sustained: Make the test at the end of each of your turns, the target cannot be changed
+  flavor: "Not sure about long descriptions yet"
+- title: Firebolt
+  tags: [Physical, Fire, Spell, Attack, Aggressive]
+  cost: "a->(w)|(f)->a"
+  rules:
+    Test: (ffw)
+    Threshold: target's physical defense
+    Target: single
+    Range: line of sight
+    Damage: SM+f(a)
+  flavor: "Not sure about long descriptions yet"
+- title: Mind Flare
+  tags: [Mental, Spell]
+  cost: "a->(w)|(w)->a"
+  rules:
+    Test: (wwl)
+    Threshold: target's mental defense
+    Range: line of sight
+    Damage: SM+w(a)
+  flavor: "Not sure about long descriptions yet"
+- title: Magic Armour
+  tags: [Mental, Spell, Defense]
+  cost: "a->(w)|aa:(e)"
+  rules:
+    Target: Self
+    Sustained: +2 to Target's PD 
+  flavor: "Not sure about long descriptions yet"
+- title: Rage
+  tags: [Mental, Aggressive, Stance]
+  cost: "f:(e)"
+  rules:
+    Target: self
+    Sustained: +1 to damage for [Physical,Attack] cards
+  flavor: "Not sure about long descriptions yet"
+- title: Concentration
+  tags: [Mental, Stance]
+  cost: "s:(s)"
+  rules:
+    Target: self
+    Sustained: +1 to target's maximum hand size
+  flavor: "Not sure about long descriptions yet"
+- title: Inspiration
+  tags: [Mental, Stance]
+  cost: "w:(w)"
+  rules:
+    Target: Self
+    Sustained: +1 maximum cards drawn in the draw phase
+  flavor: "Not sure about long descriptions yet"
+- title: Immobalise
+  tags: [Mental, Aggressive]
+  cost: "(w)->w|s:(s)"
+  rules:
+    Test: (wss)
+    Threshold: target's mental defense
+    Target: Single
+    Range: Line of Sight
+    Sustained: At make a test at the start of the target's turn. On a success, they cannot move (they can still act).
+- title: Freeze
+  tags: [Mental, Aggressive]
+  cost: "(w)->ww|ss:(s)"
+  rules:
+    Test: (wss)
+    Threshold: target's mental defense
+    Target: single
+    Range: line of sight
+    Sustained: At make a test at the start of the target's turn. On a success, they cannot move or act.
+- title: Disable
+  tags: [Mental, Aggressive]
+  cost: "(w)->a|s:(s)|w:(w)"
+  rules:
+    Test: (wss)
+    Threshold: Target's MD
+    Target: Single
+    Range: Line of Sight
+    Sustained: When target makes an attack, make a test. On a success, they cannot attack (or their attack automatically misses)
+- title: Conflagritest
+  tags: [Physical, Fire, Spell, Attack, Aggressive, AoE]
+  cost: "af->(f)|(i)->a|a:(l)"
+  rules:
+    Range: 5 from self
+    Target: (lightning gems owned) in range
+    Damage: (fire gems owned)
+  flavor: "explosion"
+- title: Watershot
+  tags: [Physical, Water, Spell, Attack, Aggressive]
+  cost: "a->(w)|(i)->f|w:(f)"
+  rules:
+    Range: 20 from self
+    Target: Single
+    Damage: (gems in water sphere) + (gems in fire sphere)
+  flavor: "spit"
+- title: Focus
+  cost: "a->(s)|ee:(s)"
+  rules:
+    Target: Self
+    Sustained: Add a virtual gem of type moved to spirit to a single pool in any test
+  flavor: "not balanced"
+- title: Mudman
+  tags: [Physical, Stance]
+  cost: "a->(t)|(i)->t|w:(e)"
+  rules:
+    Target: Self
+    Sustained: +1 to Target's PD
+  flavor: "Dont use external - was just for test - probably should add earth to PD"

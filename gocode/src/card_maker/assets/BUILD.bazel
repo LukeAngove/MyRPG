@@ -1,4 +1,20 @@
 filegroup(
+    name = "cards",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "cards.yml",
+    ],
+)
+
+filegroup(
+    name = "templates",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "default.html",
+    ],
+)
+
+filegroup(
     name = "card_maker_assets",
     visibility = ["//visibility:public"],
     srcs = [
