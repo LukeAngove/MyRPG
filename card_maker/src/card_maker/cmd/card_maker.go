@@ -189,24 +189,11 @@ func draw_arrow(canvas *svg.SVG, position Pos, scale float32) {
 	canvas.Polyline(pts_point_x, pts_point_y, format)
 }
 
-func get_color_list() map[string]string {
-	return map[string]string{
-		"a": "grey",
-		"i": "white",
-		"t": "black",
-		"l": "yellow",
-		"f": "red",
-		"e": "brown",
-		"w": "blue",
-		"s": "green",
-	}
-}
-
-func make_gem(gtype string, sphere string, gems string) GemDraw {
-	sphere_color := get_color_list()[sphere]
+func make_gem(gtype string, sphere string, gems string, colors map[string]string) GemDraw {
+	sphere_color := colors[sphere]
 	gem_colors := make([]string, len(gems))
 	for i, g := range gems {
-		gem_colors[i] = get_color_list()[string(g)]
+		gem_colors[i] = colors[string(g)]
 	}
 
 	return GemDraw{
@@ -216,9 +203,7 @@ func make_gem(gtype string, sphere string, gems string) GemDraw {
 	}
 }
 
-func parse_single(the_string string) GemDraw {
-	colors := get_color_list()
-
+func parse_single(the_string string, colors map[string]string) GemDraw {
 	colors_bytes := make([]byte, len(colors))
 	for k, _ := range colors {
 		colors_bytes = append(colors_bytes, []byte(k)[0])
@@ -238,15 +223,15 @@ func parse_single(the_string string) GemDraw {
 
 	groups := in_colors_re.FindStringSubmatch(the_string)
 	if groups != nil {
-		gemDraw = make_gem("in", groups[2], groups[1])
+		gemDraw = make_gem("in", groups[2], groups[1], colors)
 	} else {
 		groups = into_colors_re.FindStringSubmatch(the_string)
 		if groups != nil {
-			gemDraw = make_gem("into", groups[2], groups[1])
+			gemDraw = make_gem("into", groups[2], groups[1], colors)
 		} else {
 			groups = out_colors_re.FindStringSubmatch(the_string)
 			if groups != nil {
-				gemDraw = make_gem("out", groups[1], groups[2])
+				gemDraw = make_gem("out", groups[1], groups[2], colors)
 			} else {
 				panic(fmt.Sprintf("No match for pattern: %s", the_string))
 			}
@@ -256,12 +241,12 @@ func parse_single(the_string string) GemDraw {
 	return gemDraw
 }
 
-func parse_all(the_string string) []GemDraw {
+func parse_all(the_string string, colors map[string]string) []GemDraw {
 	the_string = strings.Replace(the_string, " ", "", -1)
 	gems := strings.Split(the_string, "|")
 	res := make([]GemDraw, len(gems))
 	for i, g := range gems {
-		res[i] = parse_single(g)
+		res[i] = parse_single(g, colors)
 	}
 	return res
 }
@@ -370,8 +355,8 @@ func (drawer *Drawer) Finish() string {
 	return drawer.outbuffer.String()
 }
 
-func text_to_svg(in_string string, scale float32) string {
-	gems := parse_all(in_string)
+func text_to_svg(in_string string, scale float32, colors map[string]string) string {
+	gems := parse_all(in_string, colors)
 	width := calc_width(gems, scale)
 
 	drawer := NewDrawer(width, scale)
@@ -392,8 +377,9 @@ func text_to_svg(in_string string, scale float32) string {
 }
 
 type Cards struct {
-	Cards []MyCard `yaml:"cards"`
-	Rules []string `yaml:"rules_order"`
+	Cards  []MyCard          `yaml:"cards"`
+	Rules  []string          `yaml:"rules_order"`
+	Colors map[string]string `yaml:"colors"`
 }
 
 func check(e error) {
@@ -417,7 +403,7 @@ func makeCardsFromTemplate(yaml_desc string, html_template string, output string
 	t := template.Must(template.ParseFiles(paths...))
 
 	for i, c := range cards.Cards {
-		cards.Cards[i].Cost = text_to_svg(c.Cost, 4)
+		cards.Cards[i].Cost = text_to_svg(c.Cost, 4, cards.Colors)
 	}
 
 	file, err := os.Create(output)
