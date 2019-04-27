@@ -25,33 +25,53 @@ jobs:
             wget https://github.com/bazelbuild/bazel/releases/download/0.24.1/bazel-0.24.1-installer-linux-x86_64.sh;
             chmod +x bazel-0.24.1-installer-linux-x86_64.sh;
             ./bazel-0.24.1-installer-linux-x86_64.sh --user;
+
       - run:
-          name: Build cardmaker Linux
+          name: Make artifacts directory
+          command: mkdir artifacts
+
+      - run:
+          name: Build Cardmaker Linux
           command: |
             cd gocode;
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 //:card_maker;
+            cd ..;
+            cp gocode/bazel-bin/card_maker.tgz ./artifacts/card_maker_linux_x64.tgz;
 
-      - store_artifacts:
-          path: gocode/bazel-bin/card_maker.tar.gz
-          destination: card_maker_linux_x64.tar.gz
 
       - run:
-          name: Build cardmaker Windows
+          name: Build Cardmaker Windows
           command: |
             cd gocode;
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:windows_amd64 //:card_maker;
-
-      - store_artifacts:
-          path: gocode/bazel-bin/card_maker.tar.gz
-          destination: card_maker_windows_x64.tar.gz
+            cd ..;
+            cp gocode/bazel-bin/card_maker.tgz ./artifacts/card_maker_windows_x64.tgz;
 
       - run:
-          name: Build cardmaker MacOS
+          name: Build Cardmaker Darwin
           command: |
             cd gocode;
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:darwin_amd64 //:card_maker;
+            cd ..;
+            cp gocode/bazel-bin/card_maker.tgz ./artifacts/card_maker_darwin_x64.tgz;
+
+      - run:
+          name: Make cards html
+          command: |
+            cd gocode;
+            /home/circleci/bin/bazel build //:cards;
+            cd ..;
+            cp gocode/bazel-bin/cards.html ./artifacts/cards.html;
 
       - store_artifacts:
-          path: gocode/bazel-bin/card_maker.tar.gz
-          destination: card_maker_darwin_x64.tar.gz
+          path: artifacts/*
+
+      - run:
+          name: "Publish Linux on GitHub"
+          command: |
+            go get github.com/tcnksm/ghr
+            # $(my-binary --version)
+            VERSION=latest
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} artifacts
+
 

@@ -19,7 +19,7 @@ type MyCard struct {
 	Title  string
 	Image  string
 	Cost   string
-	Rules  string
+	Rules  map[string]string
 	Flavor string
 }
 
@@ -393,6 +393,7 @@ func text_to_svg(in_string string, scale float32) string {
 
 type Cards struct {
 	Cards []MyCard `yaml:"cards"`
+	Rules []string `yaml:"rules_order"`
 }
 
 func check(e error) {
@@ -401,7 +402,7 @@ func check(e error) {
 	}
 }
 
-func makeCardsFromTemplate(yaml_desc string, html_template string) {
+func makeCardsFromTemplate(yaml_desc string, html_template string, output string) {
 	paths := []string{
 		html_template,
 	}
@@ -415,19 +416,21 @@ func makeCardsFromTemplate(yaml_desc string, html_template string) {
 
 	t := template.Must(template.ParseFiles(paths...))
 
-	for _, c := range cards.Cards {
-		c.Cost = text_to_svg(c.Cost, 4)
-		file, err := os.Create(fmt.Sprintf("%s.html", c.Title))
-		check(err)
-		err = t.Execute(file, c)
-		check(err)
+	for i, c := range cards.Cards {
+		cards.Cards[i].Cost = text_to_svg(c.Cost, 4)
 	}
+
+	file, err := os.Create(output)
+	check(err)
+	err = t.Execute(file, cards)
+	check(err)
 }
 
 func main() {
-	var card_source = flag.String("--card_outlines", "cards.yml", "YAML file describing cards")
-	var html_template = flag.String("--html_template", "default.html", "HTML template for cards")
+	var card_source = flag.String("card_outlines", "cards.yml", "YAML file describing cards")
+	var html_template = flag.String("html_template", "default.html", "HTML template for cards")
+	var output = flag.String("output", "cards.html", "HTML output for cards")
 	flag.Parse()
 
-	makeCardsFromTemplate(*card_source, *html_template)
+	makeCardsFromTemplate(*card_source, *html_template, *output)
 }

@@ -8,19 +8,19 @@ A motion is decribed by one or more of:
 
 Where the letters are:
 
-| letter | Element | Colour        |
-|-|-|-|
-| a | Any          | Any           |
-| i | Any Internal | Blue or Green |
-| t | Any External | Red or Brown  |
-| f | Fire         | Red           |
-| w | Water        | Blue          |
-| e | Earth        | Brown         |
-| l | Lightning    | Yellow        |
+| letter | Element      | Colour         |
+| ------ | ------------ | -------------- |
+| a      | Any          | Any            |
+| i      | Any Internal | Blue or Purple |
+| t      | Any External | Red or Brown   |
+| f      | Fire         | Red            |
+| w      | Water        | Blue           |
+| e      | Earth        | Brown          |
+| l      | Lightning    | Yellow         |
 
 Costs are separated by a '|'.
 So for example, a cost of:
-**a -> (r) | w:(e) | (e) -> y**
+**a -> (f) | w:(e) | (e) -> l**
 
 Would mean:
 - Move any gem into the Fire Sphere
@@ -28,7 +28,7 @@ Would mean:
 - One Lightning gem must be moved out of the Earth Sphere
 
 Multiple gems can be listed at once, for example:
-**a,e -> (y)**
+**ae -> (l)**
 
 Would mean:
 Move an Earth and any other colour gem into the Lightning Sphere.
@@ -37,7 +37,7 @@ Multiple spheres must be separate entries, e.g.:
 **a -> (f) | a -> (w)**
 
 Multiple spheres of the same kind must be listed, e.g.:
-**a,a -> (f)**
+**aa -> (f)**
 
 To move 2 of any gem into the Fire sphere.
 
@@ -45,7 +45,11 @@ Some abilities may have different effects, depending on
 the number of gems used. This is denoted using an 'x', 
 so an ability that allows the player to move some number of
 Lightning gems out of the Fire Sphere would be written as:
-**(f) -> xl**
+**(f) -> Xl**
+
+There are rare cases when all gems of a type must be moved out of a sphere.
+This is denoted with a capital 'A', e.g.:
+**(f) -> Al**
 
 Note that motions in and out CAN be chained; if one action requires moving gems out of a sphere, and they move out into another sphere, and another action requires move the same gems into that same sphere, then the actions can count the same motion for both criteria.
 
@@ -62,7 +66,7 @@ playing the card. Sustained costs are only associated with
 **a:(a)**.
 
 For example, if there are two cards with costs:
-- **a -> (w) | w,w:(w)**
+- **a -> (w) | ww:(w)**
 - **l -> (w) | w:(w) | (l) -> f**
 
 Then the minimum gems and movements required to play both cards would be:
@@ -89,3 +93,4 @@ card, completely resolve it's action, and then activate the
 second, then we would need a minimum of only 2 water gems in
 the water sphere, as once the first card is resolved, both
 gems become 'available' for use again.
+
