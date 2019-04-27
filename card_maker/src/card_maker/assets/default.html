@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{{ .Title }}</title>
+    <title>Cards</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,6 +12,11 @@
             padding: 0 10px;
         }
     
+        .host {
+            border: none;
+            width: 100%
+        }
+
         .Cost {
             margin: auto;
             border: none;
@@ -23,6 +28,7 @@
             text-align: left;
             border: none;
             padding: 0 0px;
+            list-style-type: none;
         }
 
         .Image {
@@ -42,31 +48,54 @@
             width: 2.5in;
             height: 3.5in;
             box-shadow: 8px 8px 2px #ddd;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 4px 3px;
         }
     
-        .contentZone {
+        .contentZoneImage {
             font-size: 9pt;
             width: 2.25in;
-            height: {{if .Image}}1.5in{{else}}2.8in{{end}};
+            height: 1.5in;
+            margin: 0px 0;
+        }
+
+        .contentZoneNoImage {
+            font-size: 9pt;
+            width: 2.25in;
+            height: 2.8in;
             margin: 0px 0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h3>{{ .Title }}</h3>
-        {{if .Image}}<img src={{ .Image }} class="Image" alt="No image found">{{end}}
-        <div class="contentZone">
-            <div class="Cost">
-            {{ .Cost }}
-            </div>
-            <div class="Rules">
-            {{ .Rules }}
-            </div>
-            <div class="Description">
-            {{ .Flavor }}
+    <div class="host">
+        {{ $rules := .Rules }}
+        {{ range $card := .Cards }}
+        <div class="container">
+            <h3>{{ $card.Title }}</h3>
+            {{ if $card.Image }}<img src={{ $card.Image }} class="Image" alt="No image found">{{ end }}
+            <div class="contentZone{{if .Image}}{{else}}No{{end}}Image">
+                <div class="Cost">
+                {{ $card.Cost }}
+                </div>
+                {{ if $card.Rules }}
+                <div class="Rules">
+                    <ul class="Rules">
+                    {{ range $key := $rules }}
+                        {{ if (index $card.Rules $key) }}
+                        <li><b>{{ $key }}:</b> {{ index $card.Rules $key }}</li>
+                        {{ end }}
+                    {{ end }}
+                    </ul>
+                </div>
+                {{ end }}
+                <div class="Description">
+                {{ $card.Flavor }}
+                </div>
             </div>
         </div>
+        {{ end }}
     </div>
 </body>
 </html>
