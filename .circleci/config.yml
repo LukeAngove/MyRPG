@@ -32,8 +32,8 @@ jobs:
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 //:card_maker;
 
       - store_artifacts:
-          path: gocode/bazel-bin/card_maker.tar.gz
-          destination: card_maker_linux_x64.tar.gz
+          path: gocode/bazel-bin/card_maker.tgz
+          destination: card_maker_linux_x64.tgz
 
       - run:
           name: Build cardmaker Windows
@@ -42,8 +42,8 @@ jobs:
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:windows_amd64 //:card_maker;
 
       - store_artifacts:
-          path: gocode/bazel-bin/card_maker.tar.gz
-          destination: card_maker_windows_x64.tar.gz
+          path: gocode/bazel-bin/card_maker.tgz
+          destination: card_maker_windows_x64.tgz
 
       - run:
           name: Build cardmaker MacOS
@@ -52,6 +52,17 @@ jobs:
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:darwin_amd64 //:card_maker;
 
       - store_artifacts:
-          path: gocode/bazel-bin/card_maker.tar.gz
-          destination: card_maker_darwin_x64.tar.gz
+          path: gocode/bazel-bin/card_maker.tgz
+          destination: card_maker_darwin_x64.tgz
+
+      - run:
+          name: Make cards html
+          command: |
+            cd gocode;
+            /home/circleci/bin/bazel build //:cards;
+
+      - store_artifacts:
+          path: gocode/bazel-bin/cards.html
+          destination: cards.html
+
 
