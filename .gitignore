@@ -2,8 +2,8 @@
 *.code-workspace
 .venv
 my_rpg/*
-gocode/bazel-*
+card_maker/bazel-*
 .DS_Store
-gocode/src/github.com/*
-gocode/src/gopkg.in/*
-gocode/pkg/*
+card_maker/src/github.com/*
+card_maker/src/gopkg.in/*
+card_maker/pkg/*
