@@ -2,7 +2,7 @@ def _gen_cards_impl(ctx):
     # Generate a datafile of concatenated fortunes.
     action = ctx.actions.run(
         outputs = [ctx.outputs.out],
-        inputs = ctx.files.srcs + ctx.files.template,
+        inputs = ctx.files.srcs + ctx.files.template + [ctx.executable.exe],
         executable = ctx.executable.exe,
         arguments = [
             "--html_template",

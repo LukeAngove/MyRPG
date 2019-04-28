@@ -134,7 +134,7 @@ func convert_pos(pos []Pos) ([]int, []int) {
 
 func draw_gem(canvas *svg.SVG, color string, position Pos, scale float32) {
 	offset := 0.57 * scale // To make gem fit inside sphere
-	position = Pos{position.x + offset, position.y + offset + 1}
+	position = Pos{position.x + offset + 1, position.y + offset + 1}
 	outer_line_width := float32(2.0)
 	corner_size := 1 * scale
 	flat_size := 2 * scale
@@ -160,7 +160,7 @@ func draw_gem(canvas *svg.SVG, color string, position Pos, scale float32) {
 func draw_sphere(canvas *svg.SVG, color string, position Pos, scale float32) {
 	gem_size_factor := 2.6 * scale
 	outer_line_width := float32(2.0)
-	centre := Pos{position.x + gem_size_factor, position.y + gem_size_factor + 2}
+	centre := Pos{position.x + gem_size_factor + 1, position.y + gem_size_factor + 2}
 	canvas.Circle(int(centre.x), int(centre.y), int(gem_size_factor),
 		fmt.Sprintf("fill:%s;stroke:%s;stroke_width:%d", color, "black", int(outer_line_width)))
 }
@@ -187,6 +187,16 @@ func draw_arrow(canvas *svg.SVG, position Pos, scale float32) {
 	format := fmt.Sprintf("fill:%s;stroke_width:%d;stroke:%s", "none", int(outer_line_width), "black")
 	canvas.Polyline(pts_mid_x, pts_mid_y, format)
 	canvas.Polyline(pts_point_x, pts_point_y, format)
+}
+
+func draw_bar(canvas *svg.SVG, position Pos, scale float32) {
+	bar := []Pos{{0, 0.5}, {0, 7}}
+	outer_line_width := float32(2.0)
+
+	bar = grow(bar, position, scale)
+	pts_bar_x, pts_bar_y := convert_pos(bar)
+	format := fmt.Sprintf("fill:%s;stroke_width:%d;stroke:%s", "none", int(outer_line_width), "black")
+	canvas.Polyline(pts_bar_x, pts_bar_y, format)
 }
 
 func make_gem(gtype string, sphere string, gems string, colors map[string]string) GemDraw {
@@ -264,6 +274,8 @@ func calc_width(gems []GemDraw, scale float32) float32 {
 			panic(fmt.Sprintf("Invalid gem for width calc: %s", g))
 		}
 	}
+	// Add width for spacing
+	width += 0.5 * float32(len(gems)-1)
 
 	return width
 }
@@ -305,12 +317,21 @@ func (drawer *Drawer) draw_arrow() {
 	draw_arrow(drawer.canvas, drawer.offset, drawer.scale)
 }
 
+func (drawer *Drawer) draw_bar() {
+	draw_bar(drawer.canvas, drawer.offset, drawer.scale)
+	drawer.bar_increment()
+}
+
 func (drawer *Drawer) big_increment() {
 	drawer.offset.x += 6 * drawer.scale
 }
 
 func (drawer *Drawer) small_increment() {
 	drawer.offset.x += 3.3 * drawer.scale
+}
+
+func (drawer *Drawer) bar_increment() {
+	drawer.offset.x += 0.5 * drawer.scale
 }
 
 func (drawer *Drawer) draw_in(sphere_color string, gem_colors []string) {
@@ -361,7 +382,10 @@ func text_to_svg(in_string string, scale float32, colors map[string]string) stri
 
 	drawer := NewDrawer(width, scale)
 
-	for _, g := range gems {
+	for i, g := range gems {
+		if i != 0 {
+			drawer.draw_bar()
+		}
 		if g.Type == "into" {
 			drawer.draw_into(g.Sphere, g.Gems)
 		} else if g.Type == "in" {
