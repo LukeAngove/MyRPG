@@ -2,7 +2,11 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
     name = "go_default_library",
-    srcs = ["card_maker.go"],
+    srcs = [
+        "card_maker.go",
+        "cost_drawer.go",
+        "cost_parser.go",
+        ],
     importpath = "github.com/example/project/src/card_maker/cmd",
     visibility = ["//visibility:private"],
     deps = [
