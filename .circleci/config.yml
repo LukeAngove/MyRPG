@@ -55,12 +55,21 @@ jobs:
             cp card_maker/bazel-bin/card_maker.tgz ./artifacts/card_maker_darwin_x64.tgz;
 
       - run:
-          name: Make cards html
+          name: Make playable cards html
           command: |
             cd card_maker;
             /home/circleci/bin/bazel build //:cards;
             cd ..;
             cp card_maker/bazel-bin/cards.html ./artifacts/cards.html;
+
+      - run:
+          name: Make monster cards html
+          command: |
+            cd card_maker;
+            /home/circleci/bin/bazel build //:monsters;
+            cd ..;
+            cp card_maker/bazel-bin/monsters.html ./artifacts/monsters.html;
+
 
       - store_artifacts:
           path: artifacts/*

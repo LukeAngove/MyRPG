@@ -1,0 +1,30 @@
+rules_order:
+- Challenge
+- HitPoints
+- Attributes
+- PD
+- MD
+
+abilities_order:
+- Test
+- Threshold
+- Target
+- Range
+- Damage
+- Effect
+
+cards:
+- title: Grunt
+  tags: []
+  rules:
+    Challenge: 20
+    HitPoints: 8
+    Attributes: "L:1 F:1 E:1 W:1 S:1"
+    PD: 3
+    MD: 3
+  abilities:
+    - name: BasicAttack
+      Test: ffe
+      Damage: SM + 1
+  flavor: "Not sure about long descriptions yet"
+

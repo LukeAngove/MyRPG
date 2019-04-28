@@ -3,10 +3,11 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "go_default_library",
     srcs = [
-        "card_maker.go",
+        "utils.go",
         "cost_drawer.go",
         "cost_parser.go",
-        ],
+        "card_maker.go",
+    ],
     importpath = "github.com/example/project/src/card_maker/cmd",
     visibility = ["//visibility:private"],
     deps = [
@@ -18,8 +19,23 @@ go_library(
 go_binary(
     name = "card_maker",
     embed = [":go_default_library"],
+    srcs = [
+        "playable_cards.go",
+    ],
     visibility = ["//visibility:public"],
     data = [
       "//src/card_maker/assets:card_maker_assets"
+    ]
+)
+
+go_binary(
+    name = "monster_maker",
+    embed = [":go_default_library"],
+    srcs = [
+        "monster_cards.go",
+    ],
+    visibility = ["//visibility:public"],
+    data = [
+      "//src/card_maker/assets:monster_maker_assets"
     ]
 )

@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Monsters</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    
+        div {
+            border: 1px solid #ccc;
+            padding: 0 10px;
+        }
+    
+        .host {
+            border: none;
+            width: 100%
+        }
+
+        .Cost {
+            margin: auto;
+            border: none;
+            text-align: center;
+            padding: 0 0px;
+        }
+    
+        .Rules {
+            text-align: left;
+            border: none;
+            padding: 0 0px;
+            list-style-type: none;
+        }
+
+        .Image {
+            width: 2.25in;
+            height: 1.25in;
+        }
+    
+        .Description {
+            font-style: italic;
+            text-align: left;
+            border: none;
+            padding: 0 0px;
+        }
+    
+        .container {
+            text-align: center;
+            width: 2.5in;
+            height: 3.5in;
+            box-shadow: 8px 8px 2px #ddd;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 4px 3px;
+        }
+    
+        .contentZoneImage {
+            font-size: 9pt;
+            width: 2.25in;
+            height: 1.5in;
+            margin: 0px 0;
+        }
+
+        .contentZoneNoImage {
+            font-size: 9pt;
+            width: 2.25in;
+            height: 2.8in;
+            margin: 0px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="host">
+        {{ $rules := .Rules }}
+        {{ $abilities := .Abilities }}
+        {{ range $card := .Cards }}
+        <div class="container">
+            <h3>{{ $card.Title }}</h3>
+            {{ if $card.Image }}<img src={{ $card.Image }} class="Image" alt="No image found">{{ end }}
+            <div class="contentZone{{if $card.Image}}{{else}}No{{end}}Image">
+                {{ if $card.Rules }}
+                <div class="Rules">
+                    <ul class="Rules">
+                    {{ range $key := $rules }}
+                        {{ if (index $card.Rules $key) }}
+                        <li><b>{{ $key }}:</b> {{ index $card.Rules $key }}</li>
+                        {{ end }}
+                    {{ end }}
+                    </ul>
+                </div>
+                {{ end }}
+                {{ if $card.Abilities }}
+                {{ range $ability := $card.Abilities}}
+                <div class="Rules">
+                    <hr>
+                    <b>{{ $ability.name }}</b>
+                    <ul class="Rules">
+                    {{ range $key := $abilities }}
+                        {{ if (index $ability $key) }}
+                        <li><b>{{ $key }}:</b> {{ index $ability $key }}</li>
+                        {{ end }}
+                    {{ end }}
+                    </ul>
+                </div>
+                {{ end }}
+                <hr>
+                {{ end }}
+
+                <div class="Description">
+                {{ $card.Flavor }}
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</body>
+</html>
