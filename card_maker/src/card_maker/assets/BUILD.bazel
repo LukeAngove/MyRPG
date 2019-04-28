@@ -1,16 +1,16 @@
 filegroup(
-    name = "cards",
+    name = "playable_cards",
     visibility = ["//visibility:public"],
     srcs = [
-        "cards.yml",
+        "playable.yml",
     ],
 )
 
 filegroup(
-    name = "templates",
+    name = "playable_card_template",
     visibility = ["//visibility:public"],
     srcs = [
-        "default.html",
+        "playable.html",
     ],
 )
 
@@ -18,7 +18,32 @@ filegroup(
     name = "card_maker_assets",
     visibility = ["//visibility:public"],
     srcs = [
-        "cards.yml",
-        "default.html",
+        ":playable_cards",
+        ":playable_card_template",
+    ],
+)
+
+filegroup(
+    name = "monster_cards",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "monsters.yml",
+    ],
+)
+
+filegroup(
+    name = "monster_card_template",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "monsters.html",
+    ],
+)
+
+filegroup(
+    name = "monster_maker_assets",
+    visibility = ["//visibility:public"],
+    srcs = [
+        ":monster_cards",
+        ":monster_card_template",
     ],
 )

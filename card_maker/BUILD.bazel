@@ -8,9 +8,18 @@ load("//:cards.bzl", "gen_cards")
 
 gen_cards(
     name = "cards",
-    srcs = "//src/card_maker/assets:cards",
-    template = "//src/card_maker/assets:templates",
+    exe = "//src/card_maker/cmd:card_maker",
+    srcs = "//src/card_maker/assets:playable_cards",
+    template = "//src/card_maker/assets:playable_card_template",
     out = "cards.html",
+)
+
+gen_cards(
+    name = "monsters",
+    exe = "//src/card_maker/cmd:monster_maker",
+    srcs = "//src/card_maker/assets:monster_cards",
+    template = "//src/card_maker/assets:monster_card_template",
+    out = "monsters.html",
 )
 
 pkg_tar(

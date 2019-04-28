@@ -6,6 +6,12 @@ import (
 	"strings"
 )
 
+type GemDraw struct {
+	Type   string
+	Sphere string
+	Gems   []string
+}
+
 func make_gem(gtype string, sphere string, gems string, colors map[string]string) GemDraw {
 	sphere_color := colors[sphere]
 	gem_colors := make([]string, len(gems))
