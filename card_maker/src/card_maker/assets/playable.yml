@@ -20,9 +20,9 @@ rules_order:
 cards:
 - title: Flame
   tags: [Physical, Fire, Spell, Attack, Aggressive]
-  cost: "(f)->a"
+  cost: "cost{(f)->a}"
   rules:
-    Test: ffw
+    Test: challenge{ffw}
     Threshold: Target's PD
     Target: Single
     Range: Line of Sight
@@ -30,9 +30,9 @@ cards:
   flavor: "Not sure about long descriptions yet"
 - title: Pain
   tags: [Mental, Spell, Attack, Aggressive]
-  cost: "(w)->a"
+  cost: "cost{(w)->a}"
   rules:
-    Test: wwl
+    Test: challenge{wwl}
     Threshold: Target's MD
     Target: Single
     Range: Line of Sight
@@ -40,9 +40,9 @@ cards:
   flavor: "Not sure about long descriptions yet"
 - title: Extended Pain
   tags: [Mental, Spell, Attack, Aggressive]
-  cost: "(w)->a|w:(w)"
+  cost: "cost{(w)->a|w:(w)}"
   rules:
-    Test: wwl
+    Test: challenge{wwl}
     Threshold: Target's MD
     Target: single
     Range: line of sight
@@ -51,9 +51,9 @@ cards:
   flavor: "Not sure about long descriptions yet"
 - title: Firebolt
   tags: [Physical, Fire, Spell, Attack, Aggressive]
-  cost: "a->(w)|(f)->a"
+  cost: "cost{a->(w)|(f)->a}"
   rules:
-    Test: ffw
+    Test: challenge{ffw}
     Threshold: target's physical defense
     Target: single
     Range: line of sight
@@ -61,16 +61,16 @@ cards:
   flavor: "Not sure about long descriptions yet"
 - title: Mind Flare
   tags: [Mental, Spell]
-  cost: "a->(w)|(w)->a"
+  cost: "cost{a->(w)|(w)->a}"
   rules:
-    Test: wwl
+    Test: challenge{wwl}
     Threshold: target's mental defense
     Range: line of sight
     Damage: SM + w(a)
   flavor: "Not sure about long descriptions yet"
 - title: Magic Armour
   tags: [Mental, Spell, Defense]
-  cost: "a->(w)|aa:(e)"
+  cost: "cost{a->(w)|aa:(e)}"
   rules:
     Target: Single
     Range: Self
@@ -78,7 +78,7 @@ cards:
   flavor: "Not sure about long descriptions yet"
 - title: Rage
   tags: [Mental, Aggressive, Stance]
-  cost: "f:(e)"
+  cost: "cost{f:(e)}"
   rules:
     Target: Single
     Range: Self
@@ -86,7 +86,7 @@ cards:
   flavor: "Not sure about long descriptions yet"
 - title: Concentration
   tags: [Mental, Stance]
-  cost: "s:(s)"
+  cost: "cost{s:(s)}"
   rules:
     Target: Single
     Range: Self
@@ -94,7 +94,7 @@ cards:
   flavor: "Not sure about long descriptions yet"
 - title: Inspiration
   tags: [Mental, Stance]
-  cost: "w:(w)"
+  cost: "cost{w:(w)}"
   rules:
     Target: Single
     Range: Self
@@ -102,132 +102,130 @@ cards:
   flavor: "Not sure about long descriptions yet"
 - title: Immobalise
   tags: [Mental, Aggressive]
-  cost: "(w)->w|s:(s)"
+  cost: "cost{(w)->w|s:(s)}"
   rules:
-    Test: wss
+    Test: challenge{wss}
     Threshold: Target's MD
     Target: Single
     Range: Line of Sight
     Sustained: At make a test at the start of the target's turn. On a success, they cannot move (they can still act).
 - title: Freeze
   tags: [Mental, Aggressive]
-  cost: "(w)->ww|ss:(s)"
+  cost: "cost{(w)->ww|ss:(s)}"
   rules:
-    Test: wss
+    Test: challenge{wss}
     Threshold: Target's MD
     Target: Single
     Range: line of sight
     Sustained: At make a test at the start of the target's turn. On a success, they cannot move or act.
 - title: Disable
   tags: [Mental, Aggressive]
-  cost: "(w)->a|s:(s)|w:(w)"
+  cost: "cost{(w)->a|s:(s)|w:(w)}"
   rules:
-    Test: wss
+    Test: challenge{wss}
     Threshold: Target's MD
     Target: Single
     Range: Line of Sight
     Sustained: When target makes an attack, make a test. On a success, they cannot attack (or their attack automatically misses)
 - title: Conflagritest
   tags: [Physical, Fire, Spell, Attack, Aggressive, AoE]
-  cost: "af->(f)|(i)->a|a:(l)"
+  cost: "cost{af->(f)|(i)->a|a:(l)}"
   rules:
     Range: 5 from self
-    Target: Up to <b>l(a)</b> targets in range
+    Target: Up to cost{L:(a)} targets in range
     Damage: (fire gems owned)
   flavor: "explosion"
 - title: Watershot
   tags: [Physical, Water, Spell, Attack, Aggressive]
-  cost: "a->(w)|(i)->f|w:(f)"
+  cost: "cost{a->(w)|(i)->f|w:(f)}"
   rules:
     Range: 20 from self
     Target: Single
-    Damage: <b>a(w) + a(f)</b>
+    Damage: cost{A:(w)} + cost{A:(f)}
   flavor: "spit"
 - title: Focus
-  cost: "a->(s)|ee:(s)"
+  cost: "cost{a->(s)|ee:(s)}"
   rules:
     Target: Single
     Range: Self
-    Sustained: One free instance of <b>a->(s)</b> for each action taken
+    Sustained: One free instance of cost{a->(s)} for each action taken
   flavor: "not balanced"
 - title: Mudman
   tags: [Physical, Stance]
-  cost: "a->(t)|(i)->t|w:(e)"
+  cost: "cost{a->(t)|(i)->t|w:(e)}"
   rules:
     Target: Self
     Sustained: +1 to Target's PD
   flavor: "Dont use external - was just for test - probably should add earth to PD"
 - title: Stable Stance
   tags: [Stance, Physical]
-  cost: "a:(e)|a:(f)"
+  cost: "cost{a:(e)|a:(f)}"
   rules:
     Target: Self
     Sustained: +1 to up to 2 [Attack,Physical] cards each turn
 - title: Concentration
   tags: [Stance, Mental]
-  cost: "a:(s)|a:(w)"
+  cost: "cost{a:(s)|a:(w)}"
   rules:
     Target: Self
     Sustained: +1 to up to 2 [Attack,Mental] cards each turn
 - title: Reckless Attack
   tags: [Mental, Stance]
-  cost: "aa:(w)"
+  cost: "cost{aa:(w)}"
   rules:
     Target: Self
     Sustained: Deal double damage, and suffer double damage
 - title: Explosive Damage
   tags: [Mental, Stance]
-  cost: "a:(s)|a:(f)"
+  cost: "cost{a:(s)|a:(f)}"
   rules:
     Target: Self
     Sustained: "[Spell, Attack, Target:Single] cards deal half damage to all adjacent to target"
 - title: Precision Strike
   tags: [Mental, Stance]
-  cost: "a:(w)|a:(s)"
+  cost: "cost{a:(w)|a:(s)}"
   rules:
     Target: Self
     Sustained: "[Physical, Attack] cards have +1 to damage"
 - title: Warhammer
   tags: [Physcial, Equipment, Static, Attack]
-  #cost: "(e)->a|(f)->ax"
-  cost: "(e)->a|(f)->a"
+  cost: "cost{(e)->a|(f)->A}"
   rules:
     Target: Single
     Range: Adjacent
-    Test: ffe
+    Test: challenge{ffe}
     Threshold: Target's PD
     Damage: SM + X
 - title: Rapier
   tags: [Physcial, Equipment, Static, Attack]
-  cost: "(l)->a|a:(w)"
+  cost: "cost{(l)->a|a:(w)}"
   rules:
     Target: Single
     Range: Adjacent
-    Test: ffe
+    Test: challenge{ffe}
     Threshold: Target's PD - 2
     Damage: SM + 1
 - title: Flintlock Pistol
   tags: [Physcial, Equipment, Static, Attack]
-  cost: "l->(l)"
+  cost: "cost{l->(l)}"
   rules:
     Target: Single
     Range: 20
-    Test: ffe
+    Test: challenge{ffe}
     Threshold: Target's PD
     Damage: 2
 - title: Crossbow
   tags: [Physcial, Equipment, Static, Attack]
-  #cost: "(e)->aA"
-  cost: "(e)->a"
+  cost: "cost{(e)->A}"
   rules:
     Target: Single
     Range: 50
-    Test: ffe
+    Test: challenge{ffe}
     Threshold: Target's PD
     Damage: A
 - title: Shield
   tags: [Physcial, Equipment, Static, Armour, Interrupt]
-  cost: "(e)->aa"
+  cost: "cost{(e)->aa}"
   rules:
     Target: One Attack
     Range: Self

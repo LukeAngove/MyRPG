@@ -6,23 +6,51 @@ import (
 	"strings"
 )
 
+func IsUpper(c byte) bool {
+	return 'A' <= c && c <= 'Z'
+}
+
+func ToLower(c byte) byte {
+	return strings.ToLower(string(c))[0]
+}
+
+type ChallengeDraw struct {
+	Spheres [3]string
+}
 type GemDraw struct {
 	Type   string
 	Sphere string
 	Gems   []string
+	IsX    bool
+}
+
+func make_challenge(challenge string, colors map[string]string) ChallengeDraw {
+	res := ChallengeDraw{}
+	for i, g := range challenge {
+		res.Spheres[i] = colors[string(g)]
+	}
+	return res
 }
 
 func make_gem(gtype string, sphere string, gems string, colors map[string]string) GemDraw {
 	sphere_color := colors[sphere]
 	gem_colors := make([]string, len(gems))
+	isX := false
+
 	for i, g := range gems {
-		gem_colors[i] = colors[string(g)]
+		g_col := byte(g)
+		if IsUpper(g_col) {
+			g_col = ToLower(g_col)
+			isX = true
+		}
+		gem_colors[i] = colors[string(g_col)]
 	}
 
 	return GemDraw{
 		gtype,
 		sphere_color,
 		gem_colors,
+		isX,
 	}
 }
 
@@ -33,15 +61,24 @@ func parse_single(the_string string, colors map[string]string) GemDraw {
 	}
 
 	colors_str := string(colors_bytes)
+	upper_colors_str := string(strings.ToUpper(colors_str))
 
-	in_colors_re := regexp.MustCompile(fmt.Sprintf(`([%s]+):\(([%s])\)`, colors_str, colors_str))
-	into_colors_re := regexp.MustCompile(fmt.Sprintf(`([%s]+)->\(([%s])\)`, colors_str, colors_str))
-	out_colors_re := regexp.MustCompile(fmt.Sprintf(`\(([%s])\)->([%s]+)`, colors_str, colors_str))
+	gem_str := fmt.Sprintf("[%s]|[%s]+", upper_colors_str, colors_str)
+	sphere_str := fmt.Sprintf("[%s]", colors_str)
+
+	in_colors := fmt.Sprintf(`(%s):\((%s)\)`, gem_str, sphere_str)
+	into_colors := fmt.Sprintf(`(%s)->\((%s)\)`, gem_str, sphere_str)
+	out_colors := fmt.Sprintf(`\((%s)\)->(%s)`, sphere_str, gem_str)
+
+	in_colors_re := regexp.MustCompile(in_colors)
+	into_colors_re := regexp.MustCompile(into_colors)
+	out_colors_re := regexp.MustCompile(out_colors)
 
 	gemDraw := GemDraw{
 		"None",
 		"None",
 		[]string{"None"},
+		false,
 	}
 
 	groups := in_colors_re.FindStringSubmatch(the_string)
