@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"os"
 
 	svg "github.com/ajstarks/svgo"
 )
@@ -20,87 +19,6 @@ type Pos struct {
 	y float32
 }
 
-func generate_diagram() {
-	width := 500
-	height := 500
-	canvas := svg.New(os.Stdout)
-	canvas.Start(width, height)
-	canvas.Circle(width/2, height/2, 100)
-	canvas.Text(width/2, height/2, "Hello, SVG", "text-anchor:middle;font-size:30px;fill:white")
-	canvas.End()
-}
-
-func do_rotate_90(pt Pos, centre Pos) Pos {
-	/*
-		    Translation:
-		    [x']   [1  0 cx][x]
-		    [y'] = [0  1 cy][y]
-		    [1 ]   [0  0  1][1]
-
-		    Rotation:
-		    [x']   [0 -1  0][x]
-		    [y'] = [1  0  0][y]
-		    [1 ]   [0  0  1][1]
-
-		    [x']   [1  0 cx'][0 -1  0][1  0 -cx][x]
-		    [y'] = [0  1 cy'][1  0  0][0  1 -cy][y]
-		    [1 ]   [0  0  1][0  0  1][0  0   1][1]
-		    =>
-		    [x']   [0 -1 cx'+cy][x]
-		    [y'] = [1  0 cy'-cx][y]
-		    [1 ]   [0  0     1][1]
-		    =>
-		    x' = cy+cx'-y = cx'+cy-y
-			y' = x+cy'-cx = cy'+x-cx
-	*/
-	newPt := Pos{centre.x + centre.y - pt.y, centre.y + pt.x - centre.x}
-	return newPt
-}
-
-func do_symetry(pts []Pos, centre Pos) []Pos {
-	pts_size := len(pts)
-	for i := 0; i < 3; i++ {
-		for j := 0; j < pts_size; j++ {
-			pts = append(pts, do_rotate_90(pts[i*pts_size+j], centre))
-		}
-	}
-	return pts
-}
-
-func octagon(color string, position Pos, corner_size float32, flat_size float32, outer_line_width float32) []Pos {
-	edging := outer_line_width / 2
-	total_width := edging*2 + corner_size*2 + flat_size
-	centre := Pos{position.x + (total_width / 2), position.y + total_width/2}
-
-	c1 := Pos{edging + position.x, edging + corner_size + position.y}
-	c2 := Pos{edging + corner_size + position.x, edging + position.y}
-	pts_arr := []Pos{c1, c2}
-	pts_arr = do_symetry(pts_arr, centre)
-	return pts_arr
-}
-
-func octagon_internal_corners(octagon_pts []Pos) [][]Pos {
-	size := len(octagon_pts)
-	// We add 1 point for every 2, for the corners inbetween
-	out := make([][]Pos, size/2)
-	for i := range out {
-		out[i] = make([]Pos, 3)
-	}
-	for i := 0; i < (size / 2); i++ {
-		pos := Pos{0, 0}
-		start := i * 2
-		if i%2 == 1 {
-			pos = Pos{octagon_pts[start].x, octagon_pts[start+1].y}
-		} else {
-			pos = Pos{octagon_pts[start+1].x, octagon_pts[start].y}
-		}
-		out[i][0] = octagon_pts[start+0]
-		out[i][1] = pos
-		out[i][2] = octagon_pts[start+1]
-	}
-	return out
-}
-
 func convert_pos(pos []Pos) ([]int, []int) {
 	x := make([]int, len(pos))
 	y := make([]int, len(pos))
@@ -113,27 +31,26 @@ func convert_pos(pos []Pos) ([]int, []int) {
 
 func draw_gem(canvas *svg.SVG, color string, position Pos, scale float32) {
 	offset := 0.57 * scale // To make gem fit inside sphere
-	position = Pos{position.x + offset + 1, position.y + offset + 1}
+	position = Pos{position.x + offset, position.y + offset + 1}
+	gem_size_factor := 2.0 * scale
 	outer_line_width := float32(2.0)
-	corner_size := 1 * scale
-	flat_size := 2 * scale
-	edging := outer_line_width / 2
+	centre := Pos{position.x + gem_size_factor + 1, position.y + gem_size_factor + 1}
+	canvas.Circle(int(centre.x), int(centre.y), int(gem_size_factor),
+		fmt.Sprintf("fill:%s;stroke:%s;stroke_width:%d", color, "black", int(outer_line_width)))
+}
 
-	octagon_pts := octagon(color, position, corner_size, flat_size, outer_line_width)
-	oct_x, oct_y := convert_pos(octagon_pts)
-	canvas.Polygon(oct_x, oct_y, fmt.Sprintf("fill:%s;stroke_width:%d;stroke:%s", color, int(outer_line_width), "black"))
-
-	corner_pts := octagon_internal_corners(octagon_pts)
-
-	for _, p := range corner_pts {
-		cnr_x, cnr_y := convert_pos(p)
-		canvas.Polyline(cnr_x, cnr_y, fmt.Sprintf("fill:%s;stroke_width:%d;stroke:%s", "none", int(edging), "black"))
+func draw_gem_X(canvas *svg.SVG, color string, position Pos, scale float32, isX bool) {
+	if isX {
+		draw_gem(canvas, color, Pos{position.x - 0.5*scale, position.y - 0.5*scale}, scale*1.2)
+		offset := 0.57 * scale // To make gem fit inside sphere
+		style := fmt.Sprintf("font-size:%f", scale*4)
+		if color == "black" {
+			style = style + "fill=silver"
+		}
+		canvas.Text(int(position.x+offset+1.4*scale), int(position.y+offset+4*scale), "X", style)
+	} else {
+		draw_gem(canvas, color, position, scale)
 	}
-
-	rect_x := int(position.x + edging + corner_size)
-	rect_y := int(position.y + edging + corner_size)
-	canvas.Rect(rect_x, rect_y, int(flat_size), int(flat_size),
-		fmt.Sprintf("stroke_width:%d;stroke:%s;fill:%s", int(edging), "black", "none"))
 }
 
 func draw_sphere(canvas *svg.SVG, color string, position Pos, scale float32) {
@@ -153,55 +70,36 @@ func grow(array []Pos, offset Pos, scale float32) []Pos {
 	return res
 }
 func draw_arrow(canvas *svg.SVG, position Pos, scale float32) {
-	arrow_mid := []Pos{{0, 1}, {2, 1}}
-	arrow_point := []Pos{{1, 0}, {2, 1}, {1, 2}}
+	arrow := []Pos{{0, 1}, {1.5, 1}, {0.5, 0}, {1.5, 0}, {3.0, 1.5}, {1.5, 3}, {0.5, 3}, {1.5, 2}, {0, 2}}
+
 	outer_line_width := float32(2.0)
 
-	position = Pos{position.x, position.y + 1.9*scale}
-	arrow_mid = grow(arrow_mid, position, scale)
-	arrow_point = grow(arrow_point, position, scale)
-	pts_mid_x, pts_mid_y := convert_pos(arrow_mid)
-	pts_point_x, pts_point_y := convert_pos(arrow_point)
-	format := fmt.Sprintf("fill:%s;stroke_width:%d;stroke:%s", "none", int(outer_line_width), "black")
-	canvas.Polyline(pts_mid_x, pts_mid_y, format)
-	canvas.Polyline(pts_point_x, pts_point_y, format)
+	position = Pos{position.x, position.y + 1.6*scale}
+	arrow = grow(arrow, position, scale)
+	pts_x, pts_y := convert_pos(arrow)
+	format := fmt.Sprintf("fill:%s;stroke_width:%d;stroke:%s", "gray", int(outer_line_width), "black")
+	canvas.Polygon(pts_x, pts_y, format)
 }
 
-func draw_bar(canvas *svg.SVG, position Pos, scale float32) {
-	bar := []Pos{{0, 0.5}, {0, 7}}
-	outer_line_width := float32(2.0)
-
-	bar = grow(bar, position, scale)
-	pts_bar_x, pts_bar_y := convert_pos(bar)
-	format := fmt.Sprintf("fill:%s;stroke_width:%d;stroke:%s", "none", int(outer_line_width), "black")
-	canvas.Polyline(pts_bar_x, pts_bar_y, format)
-}
-
-func calc_width(gems []GemDraw, scale float32) float32 {
+func calc_width(size float32, scale float32) float32 {
 	width := float32(0.0)
-	for _, g := range gems {
-		if g.Type == "into" {
-			width += 6*scale*2 + 3.3*scale
-		} else if g.Type == "in" {
-			width += 6 * scale
-		} else if g.Type == "out" {
-			width += 6*scale*2 + 3.3*scale
-		} else {
-			panic(fmt.Sprintf("Invalid gem for width calc: %s", g))
-		}
-	}
+	width = 8.0 * size * scale
+
 	// Add width for spacing
-	width += 0.5 * float32(len(gems)-1)
+	width += 0.5 * float32(size-1)
 
 	return width
 }
 
-func draw_gems(canvas *svg.SVG, colors []string, position Pos, scale float32) {
+func draw_gems(canvas *svg.SVG, colors []string, position Pos, scale float32, IsX bool) {
 	number := len(colors)
+	if len(colors) != 1 && IsX {
+		panic("More than one gem color, and using X! Not a valid color set!")
+	}
 	switch number {
 	case 1:
 		pos := Pos{position.x + 0.5*scale, position.y + 0.7*scale}
-		draw_gem(canvas, colors[0], pos, 0.75*scale)
+		draw_gem_X(canvas, colors[0], pos, 0.75*scale, IsX)
 		break
 	case 2:
 		pos1 := Pos{position.x + 0.6*scale, position.y}
@@ -225,53 +123,52 @@ func (drawer *Drawer) draw_sphere(sphere_color string) {
 	draw_sphere(drawer.canvas, sphere_color, drawer.offset, drawer.scale)
 }
 
-func (drawer *Drawer) draw_gems(gem_colors []string) {
-	draw_gems(drawer.canvas, gem_colors, drawer.offset, drawer.scale)
+func (drawer *Drawer) draw_gems(gem_colors []string, IsX bool) {
+	draw_gems(drawer.canvas, gem_colors, drawer.offset, drawer.scale, IsX)
 }
 
 func (drawer *Drawer) draw_arrow() {
 	draw_arrow(drawer.canvas, drawer.offset, drawer.scale)
 }
 
-func (drawer *Drawer) draw_bar() {
-	draw_bar(drawer.canvas, drawer.offset, drawer.scale)
-	drawer.bar_increment()
+func (drawer *Drawer) increment(inc float32) {
+	drawer.offset.x += inc * drawer.scale
 }
 
-func (drawer *Drawer) big_increment() {
-	drawer.offset.x += 6 * drawer.scale
+func (drawer *Drawer) draw_challenge(sphere_colors [3]string) {
+	drawer.draw_sphere(sphere_colors[1])
+	drawer.increment(4)
+	drawer.draw_sphere(sphere_colors[2])
+	drawer.increment(-2)
+	drawer.draw_sphere(sphere_colors[0])
+	drawer.increment(6)
 }
 
-func (drawer *Drawer) small_increment() {
-	drawer.offset.x += 3.3 * drawer.scale
-}
-
-func (drawer *Drawer) bar_increment() {
-	drawer.offset.x += 0.5 * drawer.scale
-}
-
-func (drawer *Drawer) draw_in(sphere_color string, gem_colors []string) {
+func (drawer *Drawer) draw_gems_in_sphere(sphere_color string, gem_colors []string, IsX bool) {
 	drawer.draw_sphere(sphere_color)
-	drawer.draw_gems(gem_colors)
-	drawer.big_increment()
+	drawer.draw_gems(gem_colors, IsX)
 }
 
-func (drawer *Drawer) draw_into(sphere_color string, gem_colors []string) {
-	drawer.draw_gems(gem_colors)
-	drawer.big_increment()
+func (drawer *Drawer) draw_in(sphere_color string, gem_colors []string, IsX bool) {
+	drawer.increment(1)
+	drawer.draw_gems_in_sphere(sphere_color, gem_colors, IsX)
+	drawer.increment(7)
+}
+
+func (drawer *Drawer) draw_into(sphere_color string, gem_colors []string, IsX bool) {
+	drawer.increment(1)
+	drawer.draw_gems_in_sphere(sphere_color, gem_colors, IsX)
+	drawer.increment(-1)
 	drawer.draw_arrow()
-	drawer.small_increment()
-	drawer.draw_sphere(sphere_color)
-	drawer.big_increment()
+	drawer.increment(8)
 }
 
-func (drawer *Drawer) draw_out(sphere_color string, gem_colors []string) {
-	drawer.draw_sphere(sphere_color)
-	drawer.big_increment()
+func (drawer *Drawer) draw_out(sphere_color string, gem_colors []string, IsX bool) {
+	drawer.increment(1)
+	drawer.draw_gems_in_sphere(sphere_color, gem_colors, IsX)
+	drawer.increment(4)
 	drawer.draw_arrow()
-	drawer.small_increment()
-	drawer.draw_gems(gem_colors)
-	drawer.big_increment()
+	drawer.increment(3)
 }
 
 func NewDrawer(width float32, scale float32) *Drawer {
@@ -293,24 +190,29 @@ func (drawer *Drawer) Finish() string {
 }
 
 func draw_gems_svg(gems []GemDraw, scale float32) string {
-	width := calc_width(gems, scale)
+	width := calc_width(float32(len(gems)), scale)
 
 	drawer := NewDrawer(width, scale)
 
-	for i, g := range gems {
-		if i != 0 {
-			drawer.draw_bar()
-		}
+	for _, g := range gems {
 		if g.Type == "into" {
-			drawer.draw_into(g.Sphere, g.Gems)
+			drawer.draw_into(g.Sphere, g.Gems, g.IsX)
 		} else if g.Type == "in" {
-			drawer.draw_in(g.Sphere, g.Gems)
+			drawer.draw_in(g.Sphere, g.Gems, g.IsX)
 		} else if g.Type == "out" {
-			drawer.draw_out(g.Sphere, g.Gems)
+			drawer.draw_out(g.Sphere, g.Gems, g.IsX)
 		} else {
 			panic(fmt.Sprintf("Invalid gem: %s", g))
 		}
 	}
 
+	return drawer.Finish()
+}
+
+func draw_challenge_svg(challenge ChallengeDraw, scale float32) string {
+	width := calc_width(1.5, scale)
+
+	drawer := NewDrawer(width, scale)
+	drawer.draw_challenge(challenge.Spheres)
 	return drawer.Finish()
 }
