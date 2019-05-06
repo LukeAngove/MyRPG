@@ -62,43 +62,20 @@ This rule in combination with the taking 10 minutes to change a character's deck
 ### Ranges
 Ranges are not given a unit of measure, just a number. This is because many RPG systems use different units that different tables prefer. From a rules perspect, it doesn't matter. If a unit is necessary, use 'meters', but feet, yards, or some made up unit all work just as well as each other, and your table can choose whatever fits.
 
-### Observations
-This lists the factors that must be obvious in the use of a specific ability. Tables are free to describe different abilities however they feel best fits the affect that they are trying to achieve, however, to help prevent meta-gaming, and give a more uniform idea of what can be observed when an ability is used. Whenever the 'rules' are questioned for if someone is aware of an ability occuring, use the observation notations on the card.
+### Percieve
+Some actions are more obvious than others. Ultimately, how dificult an action is to notice is up to the GM. However,
+to assist players and GMs get on the same page. To do this, cards may be notated with one of four options for the
+'Percieve' attribute:
+| Value    | Meaning                                                                                            |
+| -------- | -------------------------------------------------------------------------------------------------- |
+| Hidden   | Must be looking for it to see. Suggest a test if the user is being actively watched.               |
+| Subtle   | Can be noticed, but is unlikely. Suggest a simple test if not actively watched, harder if watched. |
+| Obvious* | Will be noticed if watched, possibly hidden if obscured somehow, but is in general spotted.        |
+| Awesome  | Will definitely be noticed; will draw a crowd, and draw attention.                                 |
 
-These rules should only ever be used if there is a question of if the actions may be observed or not. The common case should just be that the GM let's players know about what they observe. These rules are intended for cases like a player sneaking around, and casting spells, or trying to affect a target mid conversation, etc.
+\* If a card does not have a 'Percieve' attribute, then it is obvious.
 
-#### Effect Locations
-| Type     | Notation | Meaning                                                                                   |
-| -------- | -------- | ----------------------------------------------------------------------------------------- |
-| Targets  | T        | May be noticed at the location of all targets, successful or not.                         |
-| Affected | F        | May be noticed at the location of affected target, e.g.: Missing does not affect targets. |
-| Area     | A        | May be noticed at the area affected.                                                      |
-| Source   | S        | May be noticed at the location of the source/ability user. Usually the PC.                |
-| Travel   | X        | May be noticed during travel between the source and the target                            |
-
-#### Effect Types
-| Type     | Notation | Meaning                                                                         |
-| -------- | -------- | ------------------------------------------------------------------------------- |
-| Audio    | A        | Audible affect                                                                  |
-| Visual   | V        | Visual affect                                                                   |
-| Smell    | S        | Smell affect                                                                    |
-| Mental   | M        | Internal, mental affect; cannot be noticed other than the area explicitly noted |
-
-Successfully observing an action let's you know of the tags associted with the action, as makes sense to the GM. For example, noticing a spell is cast by sound will not let you know about tags that are visual. The recommended method for determining if a tag is applicable or not, is if there is any reasonable doubt if it would be known or not, just let it be known. The ultimate decision, as always, is left with the GM.
-
-If the affect needs a test to notice, the notation will use a ':' and a number to note the threshold, e.g.: A difficult to notice smell in an area of affect would be noted as: **A(S):7**.
-
-If an effect has a threshold, the threshold to notice increases by 1 for every 1 unit away from the affect.
-
-Multiple effects may be written, e.g.: **FS(AV)** would have audible and visual affects at both the source and the affected targets.
-
-Multiple locations may have different types, seperated using commas, e.g.: **F(A),S(V)**.
-
-The most complicated the notation would be along the lines of: **TS(A):3,T(V),A(S):5**. This would denote that an obvious visual effect at the targets, an audible effect at both the target and the source, threshold 3, and a smell in the affected area, noticable at threshold 5. This level of complexity should be VERY uncommon.
-
-If there is no number, assume a threshold of 0, which means that the affect is obvious, and automatically noticed as is determined to be reasonable by the GM. It is expected that a visual effect within line of sight would still be a threshold 0 to notice. If the effect is obscured (e.g., the are trees in the way), the GM may decide to set a threshold.
-
-The test used to determine if the affect is noticed is left to the GM, based on what the effect is, and any information relevent to the situation.
+Where a card has both an active effect and a sustain effect, 'Percieve' refers to the active effect. It is up to the GM and players to determine how obvious the sustain effect is. As a rule of thumb, use one level lower, however ultimately this decision is left with the GM.
 
 ### Acronyms
 | Acronym | Meaning                                                                                                 |
