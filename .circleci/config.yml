@@ -58,9 +58,9 @@ jobs:
           name: Make playable cards html
           command: |
             cd card_maker;
-            /home/circleci/bin/bazel build //:cards;
+            /home/circleci/bin/bazel build //:playable;
             cd ..;
-            cp card_maker/bazel-bin/cards.html ./artifacts/cards.html;
+            cp card_maker/bazel-bin/playable.html ./artifacts/playable.html;
 
       - run:
           name: Make monster cards html

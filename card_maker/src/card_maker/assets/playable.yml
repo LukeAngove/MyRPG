@@ -8,7 +8,16 @@ colors:
   w: "blue"
   s: "purple"
 
+card_type_colors:
+  - Static: gray
+  - Interrupt: yellow
+  - Attack: red
+  - Spell: blue
+  - Stance: LightSkyBlue
+
 rules_order:
+- Trigger
+- Percieve
 - Test
 - Threshold
 - Target
@@ -16,6 +25,37 @@ rules_order:
 - Damage
 - Effect
 - Sustained
+
+tag_scores:
+  l:
+    Change: 1
+    Interrupt: 1
+    Lightning: 1
+  f:
+    Aggressive: 1
+    Attack: 2
+    Fire: 1
+    Physical: 1
+  e:
+    Defense: 1
+    Armour: 1
+    Earth: 1
+    Physical: 1
+    Static: 1
+    Stance: 1
+  w:
+    Aggressive: 1
+    Attack: 2
+    Mental: 1
+    Spell: 1
+    Water: 1
+  s:
+    Defense: 1
+    Mental: 1
+    Spirit: 1
+    Spell: 1
+    Static: 1
+    Stance: 1
 
 cards:
 - title: Flame
@@ -26,7 +66,7 @@ cards:
     Threshold: Target's PD
     Target: Single
     Range: Line of Sight
-    Damage: SM + a(f)
+    Damage: SM + cost{a:(f)}
   flavor: "Not sure about long descriptions yet"
 - title: Pain
   tags: [Mental, Spell, Attack, Aggressive]
@@ -36,7 +76,7 @@ cards:
     Threshold: Target's MD
     Target: Single
     Range: Line of Sight
-    Damage: SM + a(w)
+    Damage: SM + cost{a:(w)}
   flavor: "Not sure about long descriptions yet"
 - title: Extended Pain
   tags: [Mental, Spell, Attack, Aggressive]
@@ -46,7 +86,7 @@ cards:
     Threshold: Target's MD
     Target: single
     Range: line of sight
-    Damage: SM + a(w)
+    Damage: SM + cost{a:(w)}
     Sustained: Make the test at the end of each of your turns, the target cannot be changed
   flavor: "Not sure about long descriptions yet"
 - title: Firebolt
@@ -57,21 +97,23 @@ cards:
     Threshold: target's physical defense
     Target: single
     Range: line of sight
-    Damage: SM + f(a)
+    Damage: SM + cost{f:(a)}
   flavor: "Not sure about long descriptions yet"
 - title: Mind Flare
   tags: [Mental, Spell]
   cost: "cost{a->(w)|(w)->a}"
   rules:
+    Percieve: Subtle
     Test: challenge{wwl}
     Threshold: target's mental defense
     Range: line of sight
-    Damage: SM + w(a)
+    Damage: SM + cost{w:(a)}
   flavor: "Not sure about long descriptions yet"
 - title: Magic Armour
   tags: [Mental, Spell, Defense]
   cost: "cost{a->(w)|aa:(e)}"
   rules:
+    Percieve: Subtle
     Target: Single
     Range: Self
     Sustained: +2 to Target's PD 
@@ -88,6 +130,7 @@ cards:
   tags: [Mental, Stance]
   cost: "cost{s:(s)}"
   rules:
+    Percieve: Hidden
     Target: Single
     Range: Self
     Sustained: +1 to target's maximum hand size
@@ -96,6 +139,7 @@ cards:
   tags: [Mental, Stance]
   cost: "cost{w:(w)}"
   rules:
+    Percieve: Hidden
     Target: Single
     Range: Self
     Sustained: +1 maximum cards drawn in the draw phase
@@ -104,6 +148,7 @@ cards:
   tags: [Mental, Aggressive]
   cost: "cost{(w)->w|s:(s)}"
   rules:
+    Percieve: Subtle
     Test: challenge{wss}
     Threshold: Target's MD
     Target: Single
@@ -113,6 +158,7 @@ cards:
   tags: [Mental, Aggressive]
   cost: "cost{(w)->ww|ss:(s)}"
   rules:
+    Percieve: Subtle
     Test: challenge{wss}
     Threshold: Target's MD
     Target: Single
@@ -122,6 +168,7 @@ cards:
   tags: [Mental, Aggressive]
   cost: "cost{(w)->a|s:(s)|w:(w)}"
   rules:
+    Percieve: Subtle
     Test: challenge{wss}
     Threshold: Target's MD
     Target: Single
@@ -146,6 +193,7 @@ cards:
 - title: Focus
   cost: "cost{a->(s)|ee:(s)}"
   rules:
+    Percieve: Hidden
     Target: Single
     Range: Self
     Sustained: One free instance of cost{a->(s)} for each action taken
@@ -161,12 +209,14 @@ cards:
   tags: [Stance, Physical]
   cost: "cost{a:(e)|a:(f)}"
   rules:
+    Percieve: Subtle
     Target: Self
     Sustained: +1 to up to 2 [Attack,Physical] cards each turn
 - title: Concentration
   tags: [Stance, Mental]
   cost: "cost{a:(s)|a:(w)}"
   rules:
+    Percieve: Hidden
     Target: Self
     Sustained: +1 to up to 2 [Attack,Mental] cards each turn
 - title: Reckless Attack
@@ -185,6 +235,7 @@ cards:
   tags: [Mental, Stance]
   cost: "cost{a:(w)|a:(s)}"
   rules:
+    Percieve: Hidden
     Target: Self
     Sustained: "[Physical, Attack] cards have +1 to damage"
 - title: Warhammer
@@ -218,6 +269,7 @@ cards:
   tags: [Physcial, Equipment, Static, Attack]
   cost: "cost{(e)->A}"
   rules:
+    Percieve: Subtle
     Target: Single
     Range: 50
     Test: challenge{ffe}
@@ -225,8 +277,21 @@ cards:
     Damage: A
 - title: Shield
   tags: [Physcial, Equipment, Static, Armour, Interrupt]
-  cost: "cost{(e)->aa}"
+  cost: "cost{(e)->a, (l)->a}"
   rules:
-    Target: One Attack
+    Trigger: You are the target of an [Attack,Physical] ability
+    Target: One [Attack,Physical] ability
     Range: Self
-    Effect: +2 PD
+    Effect: +2 PD for the targeted ability
+- title: Opportune Attack
+  tags: [Physcial, Attack, Interrupt]
+  cost: "cost{(l)->a|(w)->a}"
+  rules:
+    Trigger: An adjacent opponent moves to no long be adjacent to you
+    Percieve: Hidden
+    Target: Single
+    Range: Adjacent
+    Effect: |
+      You may play an [Attack,Physical] ability, targeting the moving opponent.
+      They must be a valid target for the ability, and you must pay its cost
+      simultaneously to this card.

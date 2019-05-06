@@ -7,11 +7,11 @@ load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar")
 load("//:cards.bzl", "gen_cards")
 
 gen_cards(
-    name = "cards",
+    name = "playable",
     exe = "//src/card_maker/cmd:card_maker",
     srcs = "//src/card_maker/assets:playable_cards",
     template = "//src/card_maker/assets:playable_card_template",
-    out = "cards.html",
+    out = "playable.html",
 )
 
 gen_cards(

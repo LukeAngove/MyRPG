@@ -47,6 +47,7 @@
             content: '';
             content: none;
         }
+
         table {
             border-collapse: collapse;
             border-spacing: 0;
@@ -55,12 +56,7 @@
         * {
             box-sizing: border-box;
         }
-    
-        /*div {
-            border: 1px solid #ccc;
-            padding: 0 10px;
-        }*/
-    
+
         .host {
             border: none;
             width: 100%
@@ -107,9 +103,6 @@
             box-shadow: -8px 9px 16px -3px grey;
             background: #171314;
 
-            /*margin: 4px 3px;*/
-            /*text-align: center;
-            box-shadow: 8px 8px 2px #ddd;*/
             display: inline-block;
             vertical-align: middle;
         }
@@ -135,7 +128,7 @@
             border-left: 2px solid #a9a9a9;
             border-top: 1px solid #fff;
             border-right: 1px solid #fff;
-            background: linear-gradient( 0deg, rgba(201,216,201,.3), rgba(201,216,209,.3));
+            background: linear-gradient( 0deg, rgba(201,216,201,1.0), rgba(201,216,209,1.0));
             display: flex;
             margin-top: 10px;
             margin-left: 0px;
@@ -143,7 +136,7 @@
             padding: 3px 0 0 0;
             display: flex;
             justify-content: space-between;
-            border-radius: 18px/40px;
+            border-radius: 20%;
         }
 
         .frame-header,
@@ -184,7 +177,6 @@
         .frame-text-box {
             margin: 0 10px;
             background: #d3ded6;
-            /*background-image: url(https://image.ibb.co/dFcNx7/title_bg_2.jpg);*/
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -225,18 +217,18 @@
         {{ $rules := .Rules }}
         {{ range $card := .Cards }}
         <div class="card-container">
-            <div class="card-background">
+            <div class="card-background" style="background-color:{{ $card.TypeColor }}">
                 <div class="card-frame">
-                    <div class="frame-header">
+                    <div class="frame-header"  style="box-shadow: 0 0 0 2px #171314, 0 0 0 5px {{ $card.ElementColor }}, -3px 3px 2px 5px #171314;" >
                         <h1 class="name">{{ $card.Title }}</h1>
                     </div>
                     {{ if $card.Image }}<img src={{ $card.Image }} class="image" alt="No image found">{{ end }}
-                    <div class="frame-text-box">
+                    <div class="frame-text-box" style="box-shadow: 0 0 0 2px #171314, 0 0 0 5px {{ $card.ElementColor }}, -3px 3px 2px 5px #171314;" >
                         <div class="cost">
                         {{ renderCost $card.Cost }}
                         </div>
                         <div>
-                            <p class="description">{{ $card.Tags }}</p>
+                            <p class="description">{{ join $card.Tags }}</p>
                         </div>
                         {{ if $card.Rules }}
                         <ul class="rules">
