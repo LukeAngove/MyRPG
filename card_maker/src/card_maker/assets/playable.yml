@@ -66,7 +66,7 @@ cards:
     Threshold: Target's PD
     Target: Single
     Range: Line of Sight
-    Damage: SM + cost{a:(f)}
+    Damage: SM + cost{A:(f)}
   flavor: "Not sure about long descriptions yet"
 - title: Pain
   tags: [Mental, Spell, Attack, Aggressive]
@@ -76,7 +76,7 @@ cards:
     Threshold: Target's MD
     Target: Single
     Range: Line of Sight
-    Damage: SM + cost{a:(w)}
+    Damage: SM + cost{A:(w)}
   flavor: "Not sure about long descriptions yet"
 - title: Extended Pain
   tags: [Mental, Spell, Attack, Aggressive]
@@ -86,7 +86,7 @@ cards:
     Threshold: Target's MD
     Target: single
     Range: line of sight
-    Damage: SM + cost{a:(w)}
+    Damage: SM + cost{A:(w)}
     Sustained: Make the test at the end of each of your turns, the target cannot be changed
   flavor: "Not sure about long descriptions yet"
 - title: Firebolt
@@ -97,7 +97,7 @@ cards:
     Threshold: target's physical defense
     Target: single
     Range: line of sight
-    Damage: SM + cost{f:(a)}
+    Damage: SM + cost{F:(a)}
   flavor: "Not sure about long descriptions yet"
 - title: Mind Flare
   tags: [Mental, Spell]
@@ -107,7 +107,7 @@ cards:
     Test: challenge{wwl}
     Threshold: target's mental defense
     Range: line of sight
-    Damage: SM + cost{w:(a)}
+    Damage: SM + cost{W:(a)}
   flavor: "Not sure about long descriptions yet"
 - title: Magic Armour
   tags: [Mental, Spell, Defense]
@@ -180,7 +180,7 @@ cards:
   rules:
     Range: 5 from self
     Target: Up to cost{L:(a)} targets in range
-    Damage: (fire gems owned)
+    Damage: cost{F:(a)}
   flavor: "explosion"
 - title: Watershot
   tags: [Physical, Water, Spell, Attack, Aggressive]
@@ -274,7 +274,7 @@ cards:
     Range: 50
     Test: challenge{ffe}
     Threshold: Target's PD
-    Damage: A
+    Damage: X
 - title: Shield
   tags: [Physcial, Equipment, Static, Armour, Interrupt]
   cost: "cost{(e)->a, (l)->a}"

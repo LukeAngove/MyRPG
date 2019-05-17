@@ -6,21 +6,51 @@ http_archive(
     sha256 = "77dfd303492f2634de7a660445ee2d3de2960cbd52f97d8c0dffa9362d3ddef9",
 )
 
-http_archive(
-    name = "bazel_gazelle",
-    urls = ["https://github.com/bazelbuild/bazel-gazelle/releases/download/0.17.0/bazel-gazelle-0.17.0.tar.gz"],
-    sha256 = "3c681998538231a2d24d0c07ed5a7658cb72bfb5fd4bf9911157c0e9ac6a2687",
-)
-
 load("@io_bazel_rules_go//go:deps.bzl", "go_rules_dependencies", "go_register_toolchains")
 
 go_rules_dependencies()
 
 go_register_toolchains()
 
+http_archive(
+    name = "bazel_gazelle",
+    urls = ["https://github.com/bazelbuild/bazel-gazelle/releases/download/0.17.0/bazel-gazelle-0.17.0.tar.gz"],
+    sha256 = "3c681998538231a2d24d0c07ed5a7658cb72bfb5fd4bf9911157c0e9ac6a2687",
+)
+
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
 
 gazelle_dependencies()
+
+http_archive(
+    name = "bazel_latex",
+    strip_prefix = "bazel-latex-luke.develop",
+    url = "https://github.com/LukeAngove/bazel-latex/archive/luke.develop.tar.gz",
+    sha256 = "e7203c34fd7091014e47b8d39db629a5a98c789f8761e2a30c12aaf17a49784d",
+)
+
+load("@bazel_latex//:repositories.bzl", "latex_repositories")
+
+latex_repositories()
+
+http_archive(
+    name = "bazel_pandoc",
+    strip_prefix = "bazel-pandoc-0.2",
+    url = "https://github.com/ProdriveTechnologies/bazel-pandoc/archive/v0.2.tar.gz",
+    sha256 = "47ad1f08db3e6c8cc104931c11e099fd0603c174400b9cc852e2481abe08db24",
+)
+
+load("@bazel_pandoc//:repositories.bzl", "pandoc_repositories")
+
+pandoc_repositories()
+
+http_archive(
+    name = "rpg_style",
+    strip_prefix = "DND-5e-LaTeX-Template-luke.develop",
+    url = "https://github.com/LukeAngove/DND-5e-LaTeX-Template/archive/luke.develop.tar.gz",
+    build_file = "//:BUILD.style",
+    sha256 = "fb927ed9690d45e6f81826e70016db24d0e319fef4138eca923a21c53a4392ee",
+)
 
 go_repository(
     name = "in_gopkg_yaml_v2",

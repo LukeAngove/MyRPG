@@ -1,0 +1,16 @@
+load("@bazel_latex//:latex.bzl", "latex_document")
+
+latex_document(
+    name = "handbook",
+    main = "main.tex",
+    srcs = [
+        "@bazel_latex//packages:lipsum",
+        #"@bazel_latex//packages:rpg-module",
+        #"@rpg_style//:texmf/texmf-dist/tex/generic/style/dndbook.cls",
+        "@rpg_style//:out_files",
+        #"@rpg_style//:myfiles",
+        #"@rpg_style//:dnd_style_deps",
+        "//rules:tex",
+        "//rules:latex_packages",
+        ],
+)

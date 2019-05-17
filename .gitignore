@@ -2,8 +2,10 @@
 *.code-workspace
 .venv
 my_rpg/*
-card_maker/bazel-*
+bazel-*
 .DS_Store
-card_maker/src/github.com/*
-card_maker/src/gopkg.in/*
-card_maker/pkg/*
+*.fls
+*.aux
+*.log
+*.fdb_latexmk
+

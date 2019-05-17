@@ -24,7 +24,7 @@ go_binary(
     ],
     visibility = ["//visibility:public"],
     data = [
-      "//src/card_maker/assets:card_maker_assets"
+        "//card_maker/src/card_maker/assets:card_maker_assets"
     ]
 )
 
@@ -36,6 +36,6 @@ go_binary(
     ],
     visibility = ["//visibility:public"],
     data = [
-      "//src/card_maker/assets:monster_maker_assets"
+        "//card_maker/src/card_maker/assets:monster_maker_assets"
     ]
 )
