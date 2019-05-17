@@ -4,3 +4,8 @@
 my_rpg/*
 bazel-*
 .DS_Store
+*.fls
+*.aux
+*.log
+*.fdb_latexmk
+

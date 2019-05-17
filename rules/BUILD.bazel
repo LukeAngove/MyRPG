@@ -1,0 +1,25 @@
+load("@bazel_pandoc//:pandoc.bzl", "pandoc")
+
+[pandoc(
+    name = d.split(".")[0].lower(),
+    src = d,
+    from_format = "markdown",
+    to_format = "latex",
+) for d in glob(["*.md"])]
+
+filegroup(
+    name = "tex",
+    visibility = ["//visibility:public"],
+    srcs = [d.split(".")[0].lower() for d in glob(["*.md"])],
+)
+
+filegroup(
+    name = "latex_packages",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "@bazel_latex//packages:hyperref",
+        "@bazel_latex//packages:longtable",
+        "@bazel_latex//packages:booktabs",
+        "@bazel_latex//packages:listings",
+    ],
+)

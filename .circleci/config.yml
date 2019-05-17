@@ -25,7 +25,10 @@ jobs:
             wget https://github.com/bazelbuild/bazel/releases/download/0.24.1/bazel-0.24.1-installer-linux-x86_64.sh;
             chmod +x bazel-0.24.1-installer-linux-x86_64.sh;
             ./bazel-0.24.1-installer-linux-x86_64.sh --user;
-
+      - run:
+          name: install pip
+          command: "sudo apt-get install -y python3"
+ 
       - run:
           name: Make artifacts directory
           command: mkdir artifacts
@@ -34,32 +37,37 @@ jobs:
           name: Build Cardmaker Linux
           command: |
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 //card_maker:card_maker;
-            cp bazel-bin/card_maker.tgz ./artifacts/card_maker_linux_x64.tgz;
+            cp bazel-bin/card_maker/card_maker.tgz ./artifacts/card_maker_linux_x64.tgz;
 
       - run:
           name: Build Cardmaker Windows
           command: |
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:windows_amd64 //card_maker:card_maker;
-            cp bazel-bin/card_maker.tgz ./artifacts/card_maker_windows_x64.tgz;
+            cp bazel-bin/card_maker/card_maker.tgz ./artifacts/card_maker_windows_x64.tgz;
 
       - run:
           name: Build Cardmaker Darwin
           command: |
             /home/circleci/bin/bazel build --platforms=@io_bazel_rules_go//go/toolchain:darwin_amd64 //card_maker:card_maker;
-            cp bazel-bin/card_maker.tgz ./artifacts/card_maker_darwin_x64.tgz;
+            cp bazel-bin/card_maker/card_maker.tgz ./artifacts/card_maker_darwin_x64.tgz;
 
       - run:
           name: Make playable cards html
           command: |
             /home/circleci/bin/bazel build //card_maker:playable;
-            cp bazel-bin/playable.html ./artifacts/playable.html;
+            cp bazel-bin/card_maker/playable.html ./artifacts/playable.html;
 
       - run:
           name: Make monster cards html
           command: |
             /home/circleci/bin/bazel build //card_maker:monsters;
-            cp bazel-bin/monsters.html ./artifacts/monsters.html;
+            cp bazel-bin/card_maker/monsters.html ./artifacts/monsters.html;
 
+      - run:
+          name: Make PDF file
+          command: |
+            /home/circleci/bin/bazel build //handbook;
+            cp bazel-bin/handbook/handbook.pdf ./artifacts/handbook.pdf;
 
       - store_artifacts:
           path: artifacts/*

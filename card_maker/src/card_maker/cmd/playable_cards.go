@@ -141,10 +141,10 @@ func makeCardsFromTemplate(yaml_desc string, html_template string, output string
 	fileName := filePath[len(filePath)-1]
 	t, err := template.New(fileName).Funcs(template.FuncMap{
 		"renderCost": func(str string) string {
-			return cost_string_replace(str, 3.0, cards.Colors)
+			return cost_string_replace(str, 1.0, cards.Colors)
 		},
 		"renderChallenge": func(str string) string {
-			return challenge_string_replace(str, 3.0, cards.Colors)
+			return challenge_string_replace(str, 1.0, cards.Colors)
 		},
 		"join": func(in []string) string {
 			return strings.Join(in, ", ")

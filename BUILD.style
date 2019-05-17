@@ -1,0 +1,58 @@
+load("@bazel_latex//packages:packages.bzl", "latex_package")
+
+latex_package(
+    name = "dnd_style_deps",
+    #visibility = ["//visibility:public"],
+    srcs = [
+        "@bazel_latex//packages:colortbl",
+        "@bazel_latex//packages:enumitem",
+        "@bazel_latex//packages:etoolbox",
+        "@bazel_latex//packages:geometry",
+        "@bazel_latex//packages:ifluatex",
+        "@bazel_latex//packages:tabularx",
+        "@bazel_latex//packages:tcolorbox",
+        "@bazel_latex//packages:xparse",
+        "@bazel_latex//packages:xkeyval",
+        "@bazel_latex//packages:keycommand",
+        "@bazel_latex//packages:hang",
+        "@bazel_latex//packages:numprint",
+        "@bazel_latex//packages:microtype",
+
+        "@bazel_latex//packages:fp",
+        "@bazel_latex//packages:xstring",
+        "@bazel_latex//packages:psnfss",
+        "@bazel_latex//packages:fancyhdr",
+        "@bazel_latex//packages:tocloft",
+        "@bazel_latex//packages:titlesec",
+    ],
+)
+
+files = [
+  "dnd.sty",
+  "dndbook.cls",
+  "img/paper.jpg"
+] + glob(["lib/*.sty"])
+
+filegroup(
+  name = "myfiles",
+  visibility = ["//visibility:public"],
+  srcs = files,
+)
+
+#genrule(
+#  name = 'copy_files',
+#  visibility = ["//visibility:public"],
+#  srcs = files + [":dnd_style_deps"],
+#  outs = ['texmf/texmf-dist/tex/generic/style/'+f for f in files],
+#  cmd = '\n'.join(['mkdir -p $$(dirname $(location %s)) && cp $(location %s) $(location :%s)' % (f, f, 'texmf/texmf-dist/tex/generic/style/'+f) for f in files]),
+#)
+
+filegroup(
+  name = "out_files",
+  visibility = ["//visibility:public"],
+  srcs = [
+    ":myfiles",
+    #":texmf/texmf-dist/tex/generic/style/dndbook.cls",
+    ":dnd_style_deps",
+  ]
+)

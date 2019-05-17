@@ -1,4 +1,4 @@
-#Cards
+# Cards
 
 ## Card Costs
  - 2x number of gems in the cost
@@ -66,8 +66,9 @@ Ranges are not given a unit of measure, just a number. This is because many RPG 
 Some actions are more obvious than others. Ultimately, how dificult an action is to notice is up to the GM. However,
 to assist players and GMs get on the same page. To do this, cards may be notated with one of four options for the
 'Percieve' attribute:
+
 | Value    | Meaning                                                                                            |
-| -------- | -------------------------------------------------------------------------------------------------- |
+| -------------------- | -------------------------------------------------------------------------------------------------- |
 | Hidden   | Must be looking for it to see. Suggest a test if the user is being actively watched.               |
 | Subtle   | Can be noticed, but is unlikely. Suggest a simple test if not actively watched, harder if watched. |
 | Obvious* | Will be noticed if watched, possibly hidden if obscured somehow, but is in general spotted.        |
@@ -78,14 +79,14 @@ to assist players and GMs get on the same page. To do this, cards may be notated
 Where a card has both an active effect and a sustain effect, 'Percieve' refers to the active effect. It is up to the GM and players to determine how obvious the sustain effect is. As a rule of thumb, use one level lower, however ultimately this decision is left with the GM.
 
 ### Acronyms
-| Acronym | Meaning                                                                                                 |
-| ------- | ------------------------------------------------------------------------------------------------------- |
-| MD      | Mental Defense                                                                                          |
-| PD      | Physical Defense                                                                                        |
-| LoS     | Line of Sight                                                                                           |
+| Acronym   | Meaning                                                                                             |
+| --------- | --------------------------------------------------------------------------------------------------- |
+| MD      | Mental Defense                                                                                        |
+| PD      | Physical Defense                                                                                      |
+| LoS     | Line of Sight                                                                                         |
 | SM      | Success Margin (0 or the amount the Major roll exceeds the threshold when all rolls pass the threshold) |
 
 ### Notations
-| Symbol                   | Meaning                                                                                     | Example | Example Explanation |
-| ------------------------ | ------------------------------------------------------------------------------------------- | ------- | ------------------- |
+| Symbol             | Meaning                                                                                     | Example | Example Explanation |
+| --------------- | --------------------------------- | --------- | ------------------------------- |
 | Two lowercase letters, on inside parenthesis, one not | The number of gems of the type before the parenthesis in the sphere of the type of the letter inside the parenthesis. | **a(w)** | Number of gems of any colour in the water sphere. See the table in [Skills](Skills.md) for the different letter notations |
