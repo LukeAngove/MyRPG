@@ -2,6 +2,36 @@
 
 ![Image](images/board.svg)
 
+# Goals
+## Pillars
+ - Create a strong roleplaying experience
+ - Simple mechanics
+ - Complex strategy
+ - All players should be able to be engaged as much as possible
+ - Multiple characters should work together
+ - Only roll for important things
+ - Minimise cruft and noise in gameplay (e.g.: weight, inventory management)
+ - Characters should be good at what they are good at, and bad at bad; random spikes should be rare and dramatic
+
+## Secondary Goals
+### Combat
+ - Turns should be short
+ - Turns should be impactful and dramatic
+ - Turns should be able to be planned for ahead of time as much as possible; minimal changing numbers inside a turn.
+ - Player characters should be able to work together for tactical advantage
+
+### Social
+ - All players should be able to be engaged
+ - Players should not be required to always engage
+ - Good roleplaying should help interactions
+ - Players who cannot roleplay a section should still be able to engage
+
+### Skill challenges
+ - No trivial tests; trivial actions should not require a roll
+ - Players and player characters should be able to help each other, where it makes sense
+ - Group tests should exist
+    - Group tests should not pass or fail based on a single players' roll
+
 # Forces
 2 Sides:
  - Black: external forces
