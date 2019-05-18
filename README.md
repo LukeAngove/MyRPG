@@ -4,25 +4,28 @@
 
 # Goals
 ## Pillars
- - Player narative first
- - Create a strong roleplaying experience
- - Simple in game mechanics
-     - Complex mechianics away from the table are acceptable, provided they add to the experience in a significant way, and the reason for the complexity should be overt to the player
- - Stimulating in game strategy
- - All players should be able to be engaged as much as possible
- - Multiple characters should work together
- - Only roll for things that impact the narrative
- - Remove the 'busy work', and focus on the narrative, without removing tactical depth
- - Characters should be good at what they are good at, and bad at bad; random spikes should be rare and dramatic
- - 'Leveling up' should be exciting
- - New abilities should have a noticable, and fun, impact on gameplay
- - Mechanics should be tied to the narrative
- - Rules should be on cards; rule books should not be required to play, when familiar
-    - GM screen, or other short notes is acceptable, though should be avoided where possible
- - A session should be 2-3 hours
-    - Combat should be around 30-60 mins of this time, in general
- - Good roleplaying and decicion making should be rewarded
+1. Player character narative first
+2. Gameplay should be a fun, thought provoking optimisation problem with many facets
+3. All players should be able to be engaged as much as possible
+4. A session should be 2-3 hours
 
+## Primary Goals
+ - Simple in game mechanics (1,4)
+ - Complex mechianics away from the table are acceptable, provided they add to the experience in a significant way, and the reason for the complexity should be overt to the player (2)
+ - Rules should be on cards; rule books should not be required to play, when familiar (1,3)
+ - GM screen, or other short notes is acceptable, though should be avoided where possible
+ - 'Leveling up' should be exciting (2)
+ - New abilities should have a noticable, and fun, impact on gameplay (2)
+ - Combat stragety, skill challenges, character and party design (2)
+ - Multiple characters should work together (2,3)
+ - Characters should be good at what they are good at, and bad at bad; random spikes should be rare and dramatic (1,2,3)
+ - Only roll for things that impact the narrative (1,2)
+ - Remove the 'busy work', and focus on the narrative, without removing tactical depth (1,3,4)
+ - Create a strong roleplaying experience (1)
+ - Mechanics should be tied to the narrative (1,2)
+ - Good roleplaying and decicion making should be rewarded (1,2)
+ - Combat should be around 30-60 mins of this time, in general (1,3,4)
+ 
 ## Secondary Goals
 ### Combat
  - Turns should be short
@@ -34,7 +37,7 @@
  - Card affects should be able to be understood in world
  - Combat should be a collective excersise for players and characters
  - Combat should be as simple as possible for the GM
-    - Minimise tracking different effects 
+    - Minimise tracking different effects
     - When tracking is required, tie it to something physical, and obvious
 
 ### Social
