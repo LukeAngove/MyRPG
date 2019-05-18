@@ -4,14 +4,24 @@
 
 # Goals
 ## Pillars
+ - Player narative first
  - Create a strong roleplaying experience
- - Simple mechanics
- - Complex strategy
+ - Simple in game mechanics
+     - Complex mechianics away from the table are acceptable, provided they add to the experience in a significant way, and the reason for the complexity should be overt to the player
+ - Stimulating in game strategy
  - All players should be able to be engaged as much as possible
  - Multiple characters should work together
- - Only roll for important things
- - Minimise cruft and noise in gameplay (e.g.: weight, inventory management)
+ - Only roll for things that impact the narrative
+ - Remove the 'busy work', and focus on the narrative, without removing tactical depth
  - Characters should be good at what they are good at, and bad at bad; random spikes should be rare and dramatic
+ - 'Leveling up' should be exciting
+ - New abilities should have a noticable, and fun, impact on gameplay
+ - Mechanics should be tied to the narrative
+ - Rules should be on cards; rule books should not be required to play, when familiar
+    - GM screen, or other short notes is acceptable, though should be avoided where possible
+ - A session should be 2-3 hours
+    - Combat should be around 30-60 mins of this time, in general
+ - Good roleplaying and decicion making should be rewarded
 
 ## Secondary Goals
 ### Combat
@@ -19,11 +29,18 @@
  - Turns should be impactful and dramatic
  - Turns should be able to be planned for ahead of time as much as possible; minimal changing numbers inside a turn.
  - Player characters should be able to work together for tactical advantage
+ - Random encounters should be simple to generate
+ - Planned encounters should be able to be crafted by the GM
+ - Card affects should be able to be understood in world
+ - Combat should be a collective excersise for players and characters
+ - Combat should be as simple as possible for the GM
+    - Minimise tracking different effects 
+    - When tracking is required, tie it to something physical, and obvious
 
 ### Social
- - All players should be able to be engaged
+ - Players should always be able to be engaged
  - Players should not be required to always engage
- - Good roleplaying should help interactions
+ - Good roleplaying should create more interesting and enjoyable interactions
  - Players who cannot roleplay a section should still be able to engage
 
 ### Skill challenges
@@ -31,6 +48,13 @@
  - Players and player characters should be able to help each other, where it makes sense
  - Group tests should exist
     - Group tests should not pass or fail based on a single players' roll
+
+### Cards
+ - Methodology for creating cards should be open
+ - Tables should be able to create their own cards
+ - 'Classless' system in conventional way, but cards should follow a theme, like a social 'class'
+ - Characters should not be locked out of a particular path of progression, but unlocakables are allowed
+ - GM always has the last call if a character may get a card
 
 # Forces
 2 Sides:
