@@ -8,6 +8,7 @@
 2. Gameplay should be a fun, thought provoking optimisation problem with many facets
 3. All players should be able to be engaged as much as possible
 4. A session should be 2-3 hours
+5. GMing should be about story telling, not generating tedius content
 
 ## Primary Goals
  - Simple in game mechanics (1,4)
@@ -24,33 +25,32 @@
  - Create a strong roleplaying experience (1)
  - Mechanics should be tied to the narrative (1,2)
  - Good roleplaying and decicion making should be rewarded (1,2)
- - Combat should be around 30-60 mins of this time, in general (1,3,4)
  
 ## Secondary Goals
 ### Combat
- - Turns should be short
- - Turns should be impactful and dramatic
- - Turns should be able to be planned for ahead of time as much as possible; minimal changing numbers inside a turn.
- - Player characters should be able to work together for tactical advantage
- - Random encounters should be simple to generate
- - Planned encounters should be able to be crafted by the GM
- - Card affects should be able to be understood in world
- - Combat should be a collective excersise for players and characters
- - Combat should be as simple as possible for the GM
-    - Minimise tracking different effects
-    - When tracking is required, tie it to something physical, and obvious
+ - Combat per session should be around 30-60 mins in general (1,3,4)
+ - Turns should be short (4)
+ - Turns should be impactful and dramatic (1)
+ - Turns should be able to be planned for ahead of time as much as possible; minimal changing numbers inside a turn (4)
+ - Player characters should be able to work together for tactical advantage (2,3)
+ - Random encounters should be simple to generate (5)
+ - Planned encounters should be able to be crafted by the GM (2,5)
+ - Card affects should be able to be understood in world (1)
+ - Combat should be a collective excersise for players and characters (2,3)
+ - Combat should be as simple as possible for the GM (5)
+    - Minimise tracking different effects (4,5)
+    - When tracking is required, tie it to something physical, and obvious (5)
 
 ### Social
- - Players should always be able to be engaged
- - Players should not be required to always engage
- - Good roleplaying should create more interesting and enjoyable interactions
- - Players who cannot roleplay a section should still be able to engage
+ - Players should always be able to be engaged (3)
+ - Players should not be required to always engage (2)
+ - Good roleplaying should create more interesting and enjoyable interactions (1,2)
 
 ### Skill challenges
- - No trivial tests; trivial actions should not require a roll
- - Players and player characters should be able to help each other, where it makes sense
- - Group tests should exist
-    - Group tests should not pass or fail based on a single players' roll
+ - No trivial tests; trivial actions should not require a roll (1,2,4)
+ - Players and player characters should be able to help each other, where it makes sense (2,3)
+ - Group tests should exist (2,3)
+    - Group tests should not pass or fail based on a single players' roll (1,2)
 
 ### Cards
  - Methodology for creating cards should be open
