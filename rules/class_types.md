@@ -3,9 +3,9 @@ At this stage, I think we can go classless, but keep the idea of 'paths'; specif
 
 # Types of classes
 There a groupings of classes by theme. Current themes are:
- - Change
- - Cards 
- - State
+- Change
+- Cards 
+- State
 
 ## Change/Flow
 Classes based on change use movement of gems between spheres (Flow). The idea here is that these classes embrace all forms of change, but see it differently.
@@ -19,6 +19,17 @@ Classes based on change use movement of gems between spheres (Flow). The idea he
 #### Description
 A typical rogue in this system will not so much seek to steel an keep money, but to see it move from one place to another. This doesn't mean everyone needs to be Robin Hood; a selfish rogue would simply see money as a means to an end, taking it from others to themselves, then giving it in exchange for services, which would in turn cause movement in some other way.
 
+#### Cards
+
+| Cost (gems) | Attack | Effect | Sustain | Totals |
+| ----- | ---- | ---- | ---- | ---- |
+|  1-2  |    3 |    2 |    1 |    6 |
+|  3-4  |    4 |    2 |    2 |    8 |
+|  5-6  |    2 |    1 |    1 |    4 |
+|   7+  |    1 |    1 |    0 |    2 |
+| ----  | ---- | ---- | ---- | ---- |
+| Total |   10 |    6 |    4 |   20 |
+
 ### Manipulators (Bards/Performers/Faces)
 #### Priorities:
 - Flow
@@ -29,6 +40,17 @@ A typical rogue in this system will not so much seek to steel an keep money, but
 This type of class sees the Flow in a similar way to rogues, but looks more at the movement of peoples emotions. They use their understanding of themselves, and the states of others to manipulate them for whatever their goal is. They will use the external spheres to influence others, while using internal spheres to monitor their own state, to project the image that they desire others to see, and keeping themselves from being manipulated in ways they do not want to be.
 
 Manipulators may also use tie others to their forces, using their own gems to change the states of others.
+
+#### Cards
+
+| Cost (gems) | Attack | Effect | Sustain | Totals |
+| ----- | ---- | ---- | ---- | ---- |
+|  1-2  |    1 |    3 |    2 |    6 |
+|  3-4  |    2 |    4 |    2 |    8 |
+|  5-6  |    1 |    1 |    2 |    4 |
+|   7+  |    0 |    1 |    1 |    2 |
+| ----  | ---- | ---- | ---- | ---- |
+| Total |    4 |    9 |    7 |   20 |
 
 ## State
 The State classes focus on which gems are in which spheres.
@@ -44,6 +66,17 @@ A shaman associates spirits with their own spheres, using thier own gems to give
 
 Spirits can be bound permanently, or summoned. Summoned spirits can be bound to different spheres each time they are summoned, presuming the spirit is compatible with the sphere, while bound spirits are tied to only one. Unless otherwise specified, only one spirit may be tied to each sphere.
 
+#### Cards
+
+| Cost (gems) | Attack | Effect | Sustain | Totals |
+| ----- | ---- | ---- | ---- | ---- |
+|  1-2  |    1 |    3 |    2 |    6 |
+|  3-4  |    2 |    3 |    3 |    8 |
+|  5-6  |    1 |    2 |    1 |    4 |
+|   7+  |    0 |    1 |    1 |    2 |
+| ----  | ---- | ---- | ---- | ---- |
+| Total |    4 |    9 |    7 |   20 |
+
 ### Monk
 #### Priorities:
 - Balanced Forces (Equal use of both forces)
@@ -55,7 +88,17 @@ Monks strive for balance among all things; the 5 spheres, number of gems, intern
 
 Monks look to move from one form to the next, find, and using, every form of balance along the way, flowing from internal to external forces and back in a constant state of balanced motion.
 
-## Cards
+#### Cards
+
+| Cost (gems) | Attack | Effect | Sustain | Totals |
+| ----- | ---- | ---- | ---- | ---- |
+|  1-2  |    2 |    1 |    3 |    6 |
+|  3-4  |    2 |    3 |    3 |    8 |
+|  5-6  |    1 |    2 |    1 |    4 |
+|   7+  |    0 |    1 |    1 |    2 |
+| ----  | ---- | ---- | ---- | ---- |
+| Total |    5 |    7 |    8 |   20 |
+
 ### Dancer
 #### Priorities:
 - Card chaining
@@ -66,6 +109,17 @@ Dancers are magicians. However, compared to your standard mage, they work a bit 
 
 Each new scene should reset their dance.
 
+#### Cards
+
+| Cost (gems) | Attack | Effect | Sustain | Totals |
+| ----- | ---- | ---- | ---- | ---- |
+|  1-2  |    ? |    ? |    ? |    6 |
+|  3-4  |    ? |    ? |    ? |    8 |
+|  5-6  |    ? |    ? |    ? |    4 |
+|   7+  |    ? |    ? |    ? |    2 |
+| ----  | ---- | ---- | ---- | ---- |
+| Total |    ? |    ? |    ? |   20 |
+
 ### Scorceror
 #### Priorities:
 - Number of Cards
@@ -74,6 +128,17 @@ Each new scene should reset their dance.
 #### Description
 Scorcerors have less control over their magic compared to others. They have a deck of cards, drawing a number depending on where their gems are. The cards can either be played, or used for elemental energy. Between their gems and the elemental energy from their hand, they can cast spells. The only spells they can cast are those available in their hand. Some spells come from multiple elements; they can provide any element that they come from.
 
+#### Cards
+
+| Cost (gems) | Attack | Effect | Sustain | Totals |
+| ----- | ---- | ---- | ---- | ---- |
+|  1-2  |    3 |    2 |    1 |    6 |
+|  3-4  |    3 |    2 |    3 |    8 |
+|  5-6  |    1 |    2 |    1 |    4 |
+|   7+  |    1 |    0 |    1 |    2 |
+| ----  | ---- | ---- | ---- | ---- |
+| Total |    8 |    6 |    6 |   20 |
+
 ### Wizards
 #### Priorities:
 - Currated Cards
@@ -81,3 +146,14 @@ Scorcerors have less control over their magic compared to others. They have a de
 
 #### Descprition
 Wizards have a selection of spells avialable to them. They draw in a similar way to sorcerors, but instead of relying on discarding for elemental energy, they rely on their gems, and a small set of spells that they have either in a (likely small) deck, or are statically available. Wizards function very much like how I would expect warriors to function in this system, and it could be fun to try and combine them into a single discipline; it would be a fun contrast to other systems.
+
+#### Cards
+
+| Cost (gems) | Attack | Effect | Sustain | Totals |
+| ----- | ---- | ---- | ---- | ---- |
+|  1-2  |    3 |    1 |    1 |    6 |
+|  3-4  |    2 |    3 |    3 |    8 |
+|  5-6  |    1 |    2 |    1 |    4 |
+|   7+  |    0 |    1 |    1 |    2 |
+| ----  | ---- | ---- | ---- | ---- |
+| Total |    6 |    7 |    7 |   20 |
