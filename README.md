@@ -14,66 +14,66 @@ This game is all about condensing the table top RPG experience. Many people refl
 5. Characters should be able to progress with only 2-3 hour sessions
 
 ## Primary Goals
- - Simple in game mechanics (1,5)
- - Complex mechianics away from the table are acceptable, provided they add to the experience in a significant way, and the reason for the complexity should be overt to the player (2)
- - Rules should be on cards; rule books should not be required to play, when familiar (1,3,5)
- - GM screen, or other short notes is acceptable, though should be avoided where possible (1,3)
- - 'Leveling up' should be exciting (2,4)
- - New abilities should have a noticable, and fun, impact on gameplay (2,5)
- - Crunchy combat stragety, skill challenges, character and party design (2,4)
- - Multiple characters should be able work together on tasks (2,4)
- - Characters should be good at what they are good at, and bad at bad; random spikes should be rare and dramatic (1,2,4)
- - Only roll for things that impact the narrative (1,3,5)
- - Remove the 'busy work', and focus on the narrative, without removing tactical depth (1,2,3,4,5)
- - Create a strong roleplaying experience (1)
- - Mechanics should be tied to the narrative (1,2)
- - Good roleplaying and decicion making should be rewarded (1,2,4)
+- Simple in game mechanics (1,5)
+- Complex mechianics away from the table are acceptable, provided they add to the experience in a significant way, and the reason for the complexity should be overt to the player (2)
+- Rules should be on cards; rule books should not be required to play, when familiar (1,3,5)
+- GM screen, or other short notes is acceptable, though should be avoided where possible (1,3)
+- 'Leveling up' should be exciting (2,4)
+- New abilities should have a noticable, and fun, impact on gameplay (2,5)
+- Crunchy combat stragety, skill challenges, character and party design (2,4)
+- Multiple characters should be able work together on tasks (2,4)
+- Characters should be good at what they are good at, and bad at bad; random spikes should be rare and dramatic (1,2,4)
+- Only roll for things that impact the narrative (1,3,5)
+- Remove the 'busy work', and focus on the narrative, without removing tactical depth (1,2,3,4,5)
+- Create a strong roleplaying experience (1)
+- Mechanics should be tied to the narrative (1,2)
+- Good roleplaying and decicion making should be rewarded (1,2,4)
  
 ## Secondary Goals
 ### Combat
- - Combat per session should be around 30-60 mins in general (1,3,4)
- - Turns should be short (4)
- - Turns should be impactful and dramatic (1)
- - Turns should be able to be planned for ahead of time as much as possible; minimal changing numbers inside a turn (1,2,4,5)
- - Player characters should be able to work together for tactical advantage (2,4)
- - Random encounters should be simple to generate (3)
- - Planned encounters should be able to be crafted by the GM (2,3)
- - Card affects should be able to be understood in world (1)
- - Combat should be a collective excersise for players and characters (2,4)
- - Combat should be as simple as possible for the GM (3)
- - Minimise tracking different effects (3)
- - When tracking is required, tie it to something physical, and obvious (3)
+- Combat per session should be around 30-60 mins in general (1,3,4)
+- Turns should be short (4)
+- Turns should be impactful and dramatic (1)
+- Turns should be able to be planned for ahead of time as much as possible; minimal changing numbers inside a turn (1,2,4,5)
+- Player characters should be able to work together for tactical advantage (2,4)
+- Random encounters should be simple to generate (3)
+- Planned encounters should be able to be crafted by the GM (2,3)
+- Card affects should be able to be understood in world (1)
+- Combat should be a collective excersise for players and characters (2,4)
+- Combat should be as simple as possible for the GM (3)
+- Minimise tracking different effects (3)
+- When tracking is required, tie it to something physical, and obvious (3)
 
 ### Social
- - Players should always be able to be engaged (3)
- - Players should not be required to always engage (2)
- - Good roleplaying should create more interesting and enjoyable interactions (1,2)
+- Players should always be able to be engaged (3)
+- Players should not be required to always engage (2)
+- Good roleplaying should create more interesting and enjoyable interactions (1,2)
 
 ### Skill challenges
- - No trivial tests; trivial actions should not require a roll (1,2,4)
- - Players and player characters should be able to help each other, where it makes sense (2,3)
- - Group tests should exist (2,3)
-    - Group tests should not pass or fail based on a single players' roll (1,2)
+- No trivial tests; trivial actions should not require a roll (1,2,4)
+- Players and player characters should be able to help each other, where it makes sense (2,3)
+- Group tests should exist (2,3)
+   - Group tests should not pass or fail based on a single players' roll (1,2)
 
 ### Cards
- - Methodology for creating cards should be open
- - Tables should be able to create their own cards
- - 'Classless' system in conventional way, but cards should follow a theme, like a social 'class' (1)
- - Characters should not be locked out of a particular path of progression, but unlocakables are allowed (2)
- - GM always has the last call if a character may get a card (1)
+- Methodology for creating cards should be open
+- Tables should be able to create their own cards
+- 'Classless' system in conventional way, but cards should follow a theme, like a social 'class' (1)
+- Characters should not be locked out of a particular path of progression, but unlocakables are allowed (2)
+- GM always has the last call if a character may get a card (1)
 
 # Forces
 2 Sides:
- - Black: external forces
- - White: internal forces
+- Black: external forces
+- White: internal forces
 
 # Spheres
 5 Spheres:
- - Lightning (yellow): dexterity, quick thought, change
- - Fire (red): strength, aggression, force of will on others
- - Water (blue): intelligence, outlandish thinking, innovation
- - Earth (brown): constitution, health, balance, intimidation
- - Spirit (green): mental strength, memory, will power
+- Lightning (yellow): dexterity, quick thought, change
+- Fire (red): strength, aggression, force of will on others
+- Water (blue): intelligence, outlandish thinking, innovation
+- Earth (brown): constitution, health, balance, intimidation
+- Spirit (green): mental strength, memory, will power
 
 All forces are connected to lighting (change). Lightning is both internal and external.
 
