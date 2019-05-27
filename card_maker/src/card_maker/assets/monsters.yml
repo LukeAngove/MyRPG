@@ -37,22 +37,26 @@ generator:
       min_include: 1
       max_include: 1
       items:
-        Orc:
+        - title: Orc
           tags: [Orc]
           attributes: {"F":1, "S":-1}
     class:
       min_include: 1
       max_include: 1
       items:
-        Grunt:
+        - title: Grunt
           tags: [Grunt, Minion]
-        Archer:
+        - title: Archer
           tags: [Ranged, Minion]
           attributes: {"L":1}
     modifier:
       min_include: 0
-      max_include: 1
+      max_include: 2
       items:
-        Flaming:
+        - title: Flaming
           tags: [Flaming]
           attributes: {"F":1}
+        - title: Wet
+          tags: [Wet]
+          attributes: {"W":1}
+

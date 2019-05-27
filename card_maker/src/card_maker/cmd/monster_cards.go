@@ -35,7 +35,7 @@ func NewMonsterCard() MonsterCard {
 type CardModifierHolder struct {
 	MaxInclude int `yaml:"max_include"`
 	MinInclude int `yaml:"min_include"`
-    Modifiers map[string]MonsterCard `yaml:"items"`
+    Modifiers []MonsterCard `yaml:"items"`
 }
 
 type CardGenerator struct {
@@ -109,14 +109,33 @@ func getMultiplier(mod CardModifierHolder) int {
 	return res
 }
 
-func genCombinations(mod CardModifierHolder) map[string]MonsterCard {
-	mods := mod.Modifiers
+func genCombinations(mod CardModifierHolder) []MonsterCard {
+	mods := []MonsterCard{}
 
-	if mod.MinInclude == 0 {
-		mods[""] = MonsterCard{}
+
+	if mod.MinInclude <= 0 && mod.MaxInclude >= 0 {
+		mods = append(mods, NewMonsterCard())
 	}
 
-	return mod.Modifiers
+	if mod.MinInclude <= 1 && mod.MaxInclude >= 1 {
+		mods = append(mods, mod.Modifiers...)
+	}
+
+	if mod.MinInclude <= 2 && mod.MaxInclude >= 2 {
+		new_mods := []MonsterCard{}
+
+		for i, m := range mod.Modifiers {
+			// Skip the modifiers below the current, as they have already been done
+			// with earlier iterations of i.
+			for _, nm := range mod.Modifiers[i+1:] {
+				new_mods = append(new_mods, join(m,nm))
+			}
+		}
+
+		mods = append(mods, new_mods...)
+	}
+
+	return mods
 }
 
 func applyOverlay(base_card MonsterCard, overlays CardModifierHolder) []MonsterCard {
@@ -124,9 +143,8 @@ func applyOverlay(base_card MonsterCard, overlays CardModifierHolder) []MonsterC
 
 	modifiers := genCombinations(overlays)
 
-	for key, overlay := range modifiers {
+	for _, overlay := range modifiers {
 		new_card := join(base_card, overlay)
-		new_card.Title += " " + key
 		res = append(res, new_card)
 	}
 
