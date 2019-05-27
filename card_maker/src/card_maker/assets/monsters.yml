@@ -1,3 +1,8 @@
+overlay_order:
+- race
+- class
+- modifier
+
 rules_order:
 - Challenge
 - HitPoints
@@ -41,9 +46,13 @@ generator:
       items:
         Grunt:
           tags: [Grunt, Minion]
+        Archer:
+          tags: [Ranged, Minion]
+          attributes: {"L":1}
     modifier:
-      min_include: 1
+      min_include: 0
       max_include: 1
       items:
         Flaming:
           tags: [Flaming]
+          attributes: {"F":1}
