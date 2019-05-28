@@ -1,3 +1,8 @@
+overlay_order:
+- race
+- class
+- modifier
+
 rules_order:
 - Challenge
 - HitPoints
@@ -13,18 +18,45 @@ abilities_order:
 - Damage
 - Effect
 
-cards:
-- title: Grunt
-  tags: []
-  rules:
-    Challenge: 20
-    HitPoints: 8
-    Attributes: "L:1 F:1 E:1 W:1 S:1"
-    PD: 3
-    MD: 3
-  abilities:
-    - name: BasicAttack
-      Test: ffe
-      Damage: SM + 1
-  flavor: "Not sure about long descriptions yet"
+generator:
+  base:
+    tags: []
+    attributes: {"L":1, "F":1, "E":1, "W":1, "S":1}
+    rules:
+      Challenge: 20
+      HitPoints: 8
+      PD: 3
+      MD: 3
+    abilities:
+      - name: BasicAttack
+        Test: challenge{ffe}
+        Damage: SM + 1
+    flavor: "Not sure about long descriptions yet"
+  overlays:
+    race:
+      min_include: 1
+      max_include: 1
+      items:
+        - title: Orc
+          tags: [Orc]
+          attributes: {"F":1, "S":-1}
+    class:
+      min_include: 1
+      max_include: 1
+      items:
+        - title: Grunt
+          tags: [Grunt, Minion]
+        - title: Archer
+          tags: [Ranged, Minion]
+          attributes: {"L":1}
+    modifier:
+      min_include: 0
+      max_include: 2
+      items:
+        - title: Flaming
+          tags: [Flaming]
+          attributes: {"F":1}
+        - title: Wet
+          tags: [Wet]
+          attributes: {"W":1}
 

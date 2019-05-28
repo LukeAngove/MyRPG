@@ -1,24 +1,11 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
-
-go_library(
-    name = "go_default_library",
-    srcs = [
-        "utils.go",
-        "cost_drawer.go",
-        "cost_parser.go",
-        "card_maker.go",
-    ],
-    importpath = "github.com/example/project/src/card_maker/cmd",
-    visibility = ["//visibility:private"],
-    deps = [
-        "@com_github_ajstarks_svgo//:go_default_library",
-        "@in_gopkg_yaml_v2//:go_default_library",
-    ],
-)
+load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 
 go_binary(
     name = "card_maker",
-    embed = [":go_default_library"],
+    deps = [
+        "//card_maker/src/card_maker/cardgenerator:cardgenerator",
+        "@in_gopkg_yaml_v2//:go_default_library",
+    ],
     srcs = [
         "playable_cards.go",
     ],
@@ -30,7 +17,10 @@ go_binary(
 
 go_binary(
     name = "monster_maker",
-    embed = [":go_default_library"],
+    deps = [
+        "//card_maker/src/card_maker/cardgenerator:cardgenerator",
+        "@in_gopkg_yaml_v2//:go_default_library",
+    ],
     srcs = [
         "monster_cards.go",
     ],

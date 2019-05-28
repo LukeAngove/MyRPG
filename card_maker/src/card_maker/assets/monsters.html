@@ -77,6 +77,17 @@
             <h3>{{ $card.Title }}</h3>
             {{ if $card.Image }}<img src={{ $card.Image }} class="Image" alt="No image found">{{ end }}
             <div class="contentZone{{if $card.Image}}{{else}}No{{end}}Image">
+                <div>
+                    <p class="description">{{ join $card.Tags }}</p>
+                </div>
+                {{ if $card.Attributes }}
+                <div class="Rules">
+                    <b>Attributes: </b>
+                    {{ range $key, $val := $card.Attributes }}
+                        <b>{{ $key }}:</b> {{ $val }}
+                    {{ end }}
+                </div>
+                {{ end }}
                 {{ if $card.Rules }}
                 <div class="Rules">
                     <ul class="Rules">
@@ -96,7 +107,7 @@
                     <ul class="Rules">
                     {{ range $key := $abilities }}
                         {{ if (index $ability $key) }}
-                        <li><b>{{ $key }}:</b> {{ index $ability $key }}</li>
+                        <li><b>{{ $key }}:</b> {{ renderChallenge (renderCost (index $ability $key)) }}</li>
                         {{ end }}
                     {{ end }}
                     </ul>
