@@ -109,30 +109,44 @@ func getMultiplier(mod CardModifierHolder) int {
 	return res
 }
 
-func genCombinations(mod CardModifierHolder) []MonsterCard {
-	mods := []MonsterCard{}
-
-
-	if mod.MinInclude <= 0 && mod.MaxInclude >= 0 {
-		mods = append(mods, NewMonsterCard())
-	}
-
-	if mod.MinInclude <= 1 && mod.MaxInclude >= 1 {
-		mods = append(mods, mod.Modifiers...)
-	}
-
-	if mod.MinInclude <= 2 && mod.MaxInclude >= 2 {
+func genCombinationsTop(cards []MonsterCard, depth int) []MonsterCard {
 		new_mods := []MonsterCard{}
 
-		for i, m := range mod.Modifiers {
+		for i, c := range cards {
+			new_mods = append(new_mods, genCombinationsLayer(c, cards[i+1:], depth)...)
+		}
+
+		return new_mods
+}
+
+func genCombinationsLayer(src MonsterCard, cards []MonsterCard, depth int) []MonsterCard {
+		new_mods := []MonsterCard{}
+
+		depth -= 1
+
+		if depth == 0 {
+			new_mods = append(new_mods, src)
+		} else {
 			// Skip the modifiers below the current, as they have already been done
-			// with earlier iterations of i.
-			for _, nm := range mod.Modifiers[i+1:] {
-				new_mods = append(new_mods, join(m,nm))
+			// with earlier iterations of j.
+			for j, nm := range cards {
+				new_card := join(src,nm)
+				new_mods = append(new_mods, genCombinationsLayer(new_card, cards[j+1:], depth)...)
 			}
 		}
 
-		mods = append(mods, new_mods...)
+		return new_mods
+}
+
+func genCombinations(mod CardModifierHolder) []MonsterCard {
+	mods := []MonsterCard{}
+
+	if mod.MinInclude <= 0 {
+		mods = append(mods, NewMonsterCard())
+	}
+
+	for i := mod.MinInclude; i <= mod.MaxInclude; i++ {
+		mods = append(mods, genCombinationsTop(mod.Modifiers, i)...)
 	}
 
 	return mods
