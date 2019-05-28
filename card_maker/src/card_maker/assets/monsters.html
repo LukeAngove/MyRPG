@@ -3,68 +3,213 @@
     <meta charset="utf-8">
     <title>Monsters</title>
     <style>
+        /* http://meyerweb.com/eric/tools/css/reset/ 
+        v2.0 | 20110126
+        License: none (public domain)
+        */
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
         * {
             box-sizing: border-box;
         }
-    
-        div {
-            border: 1px solid #ccc;
-            padding: 0 10px;
-        }
-    
+
         .host {
             border: none;
             width: 100%
         }
 
-        .Cost {
+        .cost {
             margin: auto;
+            margin-top: 0;
+            margin-bottom: 0;
             border: none;
             text-align: center;
             padding: 0 0px;
+            height:1.5em;
         }
     
-        .Rules {
+        .rules {
+            margin-top: 5px;
+            margin-bottom: auto;
             text-align: left;
             border: none;
             padding: 0 0px;
             list-style-type: none;
         }
 
-        .Image {
+        .image {
             width: 2.25in;
             height: 1.25in;
         }
     
-        .Description {
+        .description {
             font-style: italic;
             text-align: left;
             border: none;
             padding: 0 0px;
         }
     
-        .container {
-            text-align: center;
+        .card-container {
+            border: 1px solid black;
             width: 2.5in;
             height: 3.5in;
-            box-shadow: 8px 8px 2px #ddd;
+            margin: 0 auto;
+            margin-top: 56px;
+            border-radius: 0.125in;
+            box-sizing: border-box;
+            box-shadow: -8px 9px 16px -3px grey;
+            background: #171314;
+
             display: inline-block;
             vertical-align: middle;
-            margin: 4px 3px;
-        }
-    
-        .contentZoneImage {
-            font-size: 9pt;
-            width: 2.25in;
-            height: 1.5in;
-            margin: 0px 0;
         }
 
-        .contentZoneNoImage {
-            font-size: 9pt;
+        .card-background {
+            z-index: 0;
+            height: 3.25in;
             width: 2.25in;
-            height: 2.8in;
-            margin: 0px 0;
+            /*margin: 0.125in 0.125in 0 0.125in;*/
+            margin: 5% 5% 0 5%;
+            padding: 2px 0;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            border-bottom-left-radius: 8%;
+            border-bottom-right-radius: 8%;
+            background-color: #bbb;
+        }
+
+        /** BORDERS **/
+        .frame-header,
+        .frame-type-line {
+            border-bottom: 4px solid #a9a9a9;
+            border-left: 2px solid #a9a9a9;
+            border-top: 1px solid #fff;
+            border-right: 1px solid #fff;
+            background: linear-gradient( 0deg, rgba(201,216,201,1.0), rgba(201,216,209,1.0));
+            display: flex;
+            margin-top: 10px;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding: 3px 0 0 0;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 20%;
+        }
+
+        .frame-header,
+        .frame-art,
+        .frame-type-line {
+            box-shadow:
+            0 0 0 2px #171314,
+            0 0 0 5px #26714A,
+            -3px 3px 2px 5px #171314;
+
+            margin-bottom: 7px;
+        }
+
+        .frame-text-box {
+            box-shadow:
+            0 0 0 5px #26714A,
+            -3px 3px 2px 5px #171314;
+        }
+
+        .frame-header,
+        .frame-type-line,
+        .frame-text-box {
+            overflow: hidden;
+        }
+
+        .card-frame {
+            z-index: 1;
+            position: relative;
+            height: 98%;
+            max-width: 98%;
+            left: 1%;
+            top: 0.5%;
+            left: 1.2%;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .frame-text-box {
+            margin: 0 10px;
+            background: #d3ded6;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 10px 6px;
+            box-sizing: border-box;
+            font-size: 0.8em;
+            height: 100%;
+        }
+
+        .flavour-text {
+            font-style: italic;
+            padding: 10px 0;
+        }
+
+        ul, p {
+            margin-bottom: 5px;
+        }
+
+        .ftb-inner-margin {
+            margin: 5px 1px;
+        }
+
+        b {
+            font-weight: 600;
+        }
+
+        .name,
+        .type {
+            font-size: 1.0em;
+            margin-left: 10px;
+            align-self: baseline;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -73,51 +218,57 @@
         {{ $rules := .Rules }}
         {{ $abilities := .Abilities }}
         {{ range $card := .Cards }}
-        <div class="container">
-            <h3>{{ $card.Title }}</h3>
-            {{ if $card.Image }}<img src={{ $card.Image }} class="Image" alt="No image found">{{ end }}
-            <div class="contentZone{{if $card.Image}}{{else}}No{{end}}Image">
-                <div>
-                    <p class="description">{{ join $card.Tags }}</p>
-                </div>
-                {{ if $card.Attributes }}
-                <div class="Rules">
-                    <b>Attributes: </b>
-                    {{ range $key, $val := $card.Attributes }}
-                        <b>{{ $key }}:</b> {{ $val }}
-                    {{ end }}
-                </div>
-                {{ end }}
-                {{ if $card.Rules }}
-                <div class="Rules">
-                    <ul class="Rules">
-                    {{ range $key := $rules }}
-                        {{ if (index $card.Rules $key) }}
-                        <li><b>{{ $key }}:</b> {{ index $card.Rules $key }}</li>
+        <div class="card-container">
+            <div class="card-background" style="background-color:silver">
+                <div class="card-frame">
+                    <div class="frame-header"  style="box-shadow: 0 0 0 2px #171314, 0 0 0 5px green, -3px 3px 2px 5px #171314;" >
+                        <h1 class="name">{{ $card.Title }}</h1>
+                    </div>
+                    {{ if $card.Image }}<img src={{ $card.Image }} class="Image" alt="No image found">{{ end }}
+                    <div class="frame-text-box" style="box-shadow: 0 0 0 2px #171314, 0 0 0 5px green, -3px 3px 2px 5px #171314;" >
+                        <div>
+                            <p class="description">{{ join $card.Tags }}</p>
+                        </div>
+                        {{ if $card.Attributes }}
+                        <div class="rules">
+                            <b>Attributes: </b>
+                            {{ range $key, $val := $card.Attributes }}
+                                <b>{{ $key }}:</b> {{ $val }}
+                            {{ end }}
+                        </div>
                         {{ end }}
-                    {{ end }}
-                    </ul>
-                </div>
-                {{ end }}
-                {{ if $card.Abilities }}
-                {{ range $ability := $card.Abilities}}
-                <div class="Rules">
-                    <hr>
-                    <b>{{ $ability.name }}</b>
-                    <ul class="Rules">
-                    {{ range $key := $abilities }}
-                        {{ if (index $ability $key) }}
-                        <li><b>{{ $key }}:</b> {{ renderChallenge (renderCost (index $ability $key)) }}</li>
+                        {{ if $card.Rules }}
+                        <div class="rules">
+                            <ul class="rules">
+                            {{ range $key := $rules }}
+                                {{ if (index $card.Rules $key) }}
+                                <li><b>{{ $key }}:</b> {{ index $card.Rules $key }}</li>
+                                {{ end }}
+                            {{ end }}
+                            </ul>
+                        </div>
                         {{ end }}
-                    {{ end }}
-                    </ul>
-                </div>
-                {{ end }}
-                <hr>
-                {{ end }}
+                        {{ if $card.Abilities }}
+                        {{ range $ability := $card.Abilities}}
+                        <div class="rules">
+                            <hr>
+                            <b>{{ $ability.name }}</b>
+                            <ul class="rules">
+                            {{ range $key := $abilities }}
+                                {{ if (index $ability $key) }}
+                                <li><b>{{ $key }}:</b> {{ renderChallenge (renderCost (index $ability $key)) }}</li>
+                                {{ end }}
+                            {{ end }}
+                            </ul>
+                        </div>
+                        {{ end }}
+                        <hr>
+                        {{ end }}
 
-                <div class="Description">
-                {{ $card.Flavor }}
+                        <div class="description">
+                            {{ $card.Flavor }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
