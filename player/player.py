@@ -1,14 +1,67 @@
 #!/usr/bin/env python3
 
+class Card:
+    def __init__(self, name, cost):
+        self.name = name
+        self.cost = cost
+
+    def __repr__(self):
+        return "Card: {{name: \"{}\", cost: {}}}".format(self.name, self.cost)
+
+class Hand:
+    def __init__(self):
+        self.cards = []
+
+    def __repr__(self):
+        return "Hand: {}".format(self.cards)
+
+    def show(self):
+        return self.cards
+
+    def remove(self, index):
+        return self.cards.pop(index)
+
+    def inspect(self, index):
+        return self.cards[index]
+
+    def add(self, cards):
+        self.cards.extend(cards)
+
+class Deck:
+    def __init__(self, init=None):
+        if init is not None:
+            self.cards = init
+        else:
+            self.cards = []
+
+    def __repr__(self):
+        return "Deck : {}".format(self.cards)
+
+    def shuffle(self):
+        pass
+
+    def draw(self, num=1):
+        res = self.cards[0:num]
+        self.cards = self.cards[num:]
+        return res
+
+    def size(self):
+        return len(self.cards)
+
 class Board:
     '''The player state: board and cards.'''
 
     def __init__(self, state=None, init=1):
-        from elements import ElementRefs as E
-        from elements import BeadCounter as BC
-        self.spheres = {e:BC({e:init}) for e in E.elements()}
+        from elements import Sphere, ElementRefs as E
+
+        self.spheres = {e:Sphere({e:init}) for e in E.elements()}
         if state:
             self.spheres.update(state)
+            for e,s in self.spheres.items():
+                assert(isinstance(s, Sphere))
+
+    def __repr__(self):
+        return "Board: {}".format(self.spheres)
 
     def __eq__(self, other):
         return self.spheres == other.spheres
@@ -18,15 +71,38 @@ class Board:
         return self.spheres[sphere][beads]
 
     def add(self, sphere, beads):
-        for b,v in beads.items():
-            self.spheres[sphere][b] += v
+        self.spheres[sphere].addAll(beads)
 
-    def move(self, source, target, beads):
-        for b,v in beads.items():
-            from elements import NotEnoughBeadsException, TooManyBeadsException, BeadCounter, ElementRefs as E
-            # We need to check both here first, so that the transaction is only carried out as a whole.
-            self.spheres[source].modifyCheck(-v)
-            self.spheres[target].modifyCheck(v)
-            self.spheres[source].remove(b, v)
-            self.spheres[target].add(b, v)
+    def move(self, cost):
+        # We need to check both here first, so that the transaction is only carried out as a whole.
+        self.spheres[cost.source].modifyCheckAll(cost.beads.negate())
+        self.spheres[cost.dest].modifyCheckAll(cost.beads)
 
+        # Checks are done, so execute the actual move
+        self.spheres[cost.source].removeAll(cost.beads)
+        self.spheres[cost.dest].addAll(cost.beads)
+
+        return True
+
+class Player:
+    def __init__(self, deck):
+        self.deck = deck
+        self.hand = Hand()
+        self.board = Board()
+
+    def addBeads(self, sphere, beads):
+        self.board.add(sphere, beads)
+
+    def draw(self, num):
+        cards = self.deck.draw(num)
+        self.hand.add(cards)
+
+    def inspect(self, idx):
+        return self.hand.inspect(idx)
+
+    def play(self, idx, pay):
+        cost = self.inspect(idx).cost
+        assert(pay.meets(cost))
+        assert(self.board.move(pay))
+        return self.hand.remove(idx)
+       
