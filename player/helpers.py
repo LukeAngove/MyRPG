@@ -7,7 +7,8 @@ def createExplicitMoveCostFromSingleCost(cost, board):
     fire, earth, water, spirit, whichever has space. For any, choose first
     possible of lightning, fire, earth, water, spirit. For internal, choose
     first possible of water and spirit, external, first of fire and earth.'''
-    from elements import SingleExplicitMoveCost, ElementRefs as E, CostType as CT
+    from costs import SingleExplicitMoveCost, CostType as CT
+    from elements import ElementRefs as E
     assert(cost.type & CT.MOVE)
 
     possible_connected = E.getConnected(cost.sphere)
