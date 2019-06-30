@@ -22,15 +22,15 @@ def test_board_initial_state_any():
 # Add beads to a sphere
 def test_add_beads():
     from beads import Board, BeadCounter as BC
-    from elements import ElementRefs as E
+    from elements import shorthand as E
 
     b = Board()
-    b.add(E.lightning, {E.lightning:2})
-    expected = {E.lightning:BC({E.lightning:3}),
-                E.fire:BC({E.fire:1}),
-                E.earth:BC({E.earth:1}),
-                E.water:BC({E.water:1}),
-                E.spirit:BC({E.spirit:1})}
+    b.add(E.l, {E.l:2})
+    expected = {E.l:BC({E.l:3}),
+                E.f:BC({E.f:1}),
+                E.e:BC({E.e:1}),
+                E.w:BC({E.w:1}),
+                E.s:BC({E.s:1})}
     assert(b.spheres == expected)
 
 
@@ -38,13 +38,13 @@ def test_add_beads():
 def test_move_beads():
     from beads import Board, Sphere, BeadCounter as BC
     from costs import SingleExplicitMoveCost
-    from elements import ElementRefs as E
+    from elements import shorthand as E
 
     b = Board()
-    move = SingleExplicitMoveCost(E.lightning, E.fire, BC({E.lightning:1}))
+    move = SingleExplicitMoveCost(E.l, E.f, BC({E.l:1}))
     b.move(move)
 
-    expected = Board(state={E.lightning:Sphere(), E.fire:Sphere({E.lightning:1, E.fire:1})}, init=1)
+    expected = Board(state={E.l:Sphere(), E.f:Sphere({E.l:1, E.f:1})}, init=1)
 
     assert(b == expected)
 
@@ -52,10 +52,10 @@ def test_move_beads():
 def test_move_beads_not_enough():
     from beads import Board, NotEnoughBeadsException, BeadCounter as BC
     from costs import SingleExplicitMoveCost
-    from elements import ElementRefs as E
+    from elements import shorthand as E
 
     b = Board()
-    move = SingleExplicitMoveCost(E.lightning, E.fire, BC({E.lightning:2}))
+    move = SingleExplicitMoveCost(E.l, E.f, BC({E.l:2}))
 
     with pytest.raises(NotEnoughBeadsException):
         b.move(move)
@@ -64,11 +64,11 @@ def test_move_beads_not_enough():
 def test_move_beads_not_enough_of_element():
     from beads import Board, BeadCounter as BC, NotEnoughBeadsException
     from costs import SingleExplicitMoveCost
-    from elements import ElementRefs as E
+    from elements import shorthand as E
 
     b = Board()
-    b.add(E.lightning, BC({E.lightning:3, E.fire:1}))
-    move = SingleExplicitMoveCost(E.lightning, E.fire, BC({E.fire:2}))
+    b.add(E.l, BC({E.l:3, E.f:1}))
+    move = SingleExplicitMoveCost(E.l, E.f, BC({E.f:2}))
 
     with pytest.raises(NotEnoughBeadsException):
         b.move(move)
@@ -77,11 +77,11 @@ def test_move_beads_not_enough_of_element():
 def test_move_beads_too_many():
     from beads import TooManyBeadsException, Board, BeadCounter as BC
     from costs import SingleExplicitMoveCost
-    from elements import ElementRefs as E
+    from elements import shorthand as E
 
     b = Board()
-    b.add(E.lightning, BC({E.lightning:4}))
-    move = SingleExplicitMoveCost(E.lightning, E.fire, BC({E.lightning:5}))
+    b.add(E.l, BC({E.l:4}))
+    move = SingleExplicitMoveCost(E.l, E.f, BC({E.l:5}))
     with pytest.raises(TooManyBeadsException):
         b.move(move)
 

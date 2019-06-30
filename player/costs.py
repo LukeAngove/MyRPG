@@ -10,6 +10,11 @@ class CostType(Flag):
 
 from collections import namedtuple
 
+def cost_from_string(string):
+    import re
+    from elements import shorthand as E
+    to_match = re.compile("cost{{[{syms}]->[{syms}]}}".compile(syms=E.symbols()))
+
 SingleCost = namedtuple("SingleCost", ["type", "sphere", "beads"])
 # Cost is an iterable of SingleCosts
 

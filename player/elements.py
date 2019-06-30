@@ -35,3 +35,26 @@ class ElementRefs(Flag):
             ElementRefs.spirit: ElementRefs.connected_spirit,
         }
         return connected[e]
+
+class ElementsShorthand:
+    def __init__(self):
+        self.sh = {
+            'l': ElementRefs.lightning,
+            'f': ElementRefs.fire,
+            'e': ElementRefs.earth,
+            'w': ElementRefs.water,
+            's': ElementRefs.spirit,
+            'i': ElementRefs.internal,
+            't': ElementRefs.external,
+            'a': ElementRefs.any,
+        }
+
+        self.__dict__.update(self.sh)
+
+    def symbols(self):
+        return self.sh.keys()
+
+    def spheres(self):
+        return self.sh.keys()[:len(ElementRefs.elements())]
+
+shorthand = ElementsShorthand()
