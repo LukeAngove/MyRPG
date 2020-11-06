@@ -8,6 +8,24 @@
 
 Cards my belong to multiple categories above. When this occurs, add all costs. For example, a sustained, bought card has a net cost modifier of 0.
 
+## Buying Cards
+Cards can only be bought with the GMs permission. It's entirely possible that specific card combinations can have greater power than initially intended. It is up to each table and GM to decide what is a good fit for their table.
+
+Cards should be bought to some narrative effect. Players should not decide to buy new cards, and come in for the next session, having them in their deck. Players should approach the GM at some stage, and tell them that they are wanting to buy a card/cards. This can be done well ahead of being able to buy the card. The GM then has to opportunity to tell the player if they won't allow the card, and weave in ways to allow the player character to aquire the ability.
+
+Some ways characters may aquire abilities:
+- Training
+- Treasure
+- Quest rewards
+- Recovered amnesia
+
+These may take time during sessions, or 'down time' out of play. It is strongly recomended that aquiring new abilities be tied in with the current narrative of the game. This game targets relatively short, infrequents sessions, with constant character growth. If each ability takes a whole session to earn, then the narative may never progress. Aquiring abilites should not be trivial, but if there is a long story associated with it, just describe the narrative of it. There should not be too much rolling involved, after all, if you plan to give a player the ability regardless, what are they rolling for?
+
+## First Play
+When players first aquire an ability, it's new, fancy, and dramatic. Most players will want nothing more than to find the perfect place/time to play it. This is a good thing, and adds to the narrative. To make this more common, whenever a player aquires a new ability, they can keep it to the side, and just play it as if it were in their hand, as an extra card. Once it has been used once, it is the same as any other card. This helps create dramatic scenes, as you would find in a book or film, and adds to players feeling like their new ability is powerful and useful.
+
+This mechanic is not intended to let players build up a set of cards that they can play whenever they want. If this becomes a problem, and the GM feels like this mechanic is being abused, it can be removed, or altered, such that the game becomes fun, and challenging.
+
 ## Playing Cards
 Steps:
 1. Declare all cards that are being played simultaneously
